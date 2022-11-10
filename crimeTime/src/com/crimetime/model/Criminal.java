@@ -1,6 +1,6 @@
 package com.crimetime.model;
 
-public class CriminalBean {
+public class Criminal {
 	private int criminal_id;
 	private String criminal_name;
 	private int age;
@@ -52,7 +52,7 @@ public class CriminalBean {
 				+ ", gender=" + gender + ", markInFace=" + markInFace + ", FirstArrestPlace=" + FirstArrestPlace + "]";
 	}
 	
-	public CriminalBean(int criminal_id, String criminal_name, int age, String gender, String markInFace,
+	public Criminal(int criminal_id, String criminal_name, int age, String gender, String markInFace,
 			String firstArrestPlace) {
 		super();
 		this.criminal_id = criminal_id;
