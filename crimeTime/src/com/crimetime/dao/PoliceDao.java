@@ -1,0 +1,8 @@
+package com.crimetime.dao;
+
+import com.crimetime.exception.PoliceException;
+import com.crimetime.model.Police;
+
+public interface PoliceDao {
+	public int addPolice(Police police) throws PoliceException;
+}

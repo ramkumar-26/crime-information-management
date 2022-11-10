@@ -1,6 +1,6 @@
 package com.crimetime.model;
 
-public class VictimBean {
+public class Victim {
 	private int victim_id;
 	private String victim_name;
 	private String address;
@@ -43,7 +43,7 @@ public class VictimBean {
 	public void setAge(int age) {
 		this.age = age;
 	}
-	public VictimBean(int victim_id, String victim_name, String address, int contact_num, String gender, int age) {
+	public Victim(int victim_id, String victim_name, String address, int contact_num, String gender, int age) {
 		super();
 		this.victim_id = victim_id;
 		this.victim_name = victim_name;

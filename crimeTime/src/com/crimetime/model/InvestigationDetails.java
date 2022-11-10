@@ -1,6 +1,6 @@
 package com.crimetime.model;
 
-public class Investigation {
+public class InvestigationDetails {
 	
 	private int investigation_id;
 	private int crime_id;
@@ -37,7 +37,7 @@ public class Investigation {
 	public void setInvestigation_office_id(int investigation_office_id) {
 		this.investigation_office_id = investigation_office_id;
 	}
-	public Investigation(int investigation_id, int crime_id, int criminal_id, String investigation_status,
+	public InvestigationDetails(int investigation_id, int crime_id, int criminal_id, String investigation_status,
 			int investigation_office_id) {
 		super();
 		this.investigation_id = investigation_id;
@@ -54,7 +54,7 @@ public class Investigation {
 	}
 	
 	
-	public Investigation() {
+	public InvestigationDetails() {
 		//empty
 	}
 }
