@@ -1,10 +1,10 @@
 package com.crimetime.model;
 
-public class RequestBean {
+public class Request {
 	private int request_id;
 	private int police_id;
 	private String access_status;
-	public RequestBean(int request_id, int police_id, String access_status) {
+	public Request(int request_id, int police_id, String access_status) {
 		super();
 		this.request_id = request_id;
 		this.police_id = police_id;

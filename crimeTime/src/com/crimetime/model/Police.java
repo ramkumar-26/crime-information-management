@@ -1,6 +1,6 @@
 package com.crimetime.model;
 
-public class PoliceBean {
+public class Police {
 	
 	private int police_id;
 	private String name;
@@ -37,7 +37,7 @@ public class PoliceBean {
 	public void setAccess_status(String access_status) {
 		this.access_status = access_status;
 	}
-	public PoliceBean(int police_id, String name, String assigned_policestation, String password,
+	public Police(int police_id, String name, String assigned_policestation, String password,
 			String access_status) {
 		super();
 		this.police_id = police_id;
@@ -53,7 +53,7 @@ public class PoliceBean {
 	}
 	
 	
-	public PoliceBean() {
+	public Police() {
 		//empty
 	}
 	
