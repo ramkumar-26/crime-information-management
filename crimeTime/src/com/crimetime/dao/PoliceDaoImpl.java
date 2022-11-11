@@ -2,6 +2,7 @@ package com.crimetime.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.crimetime.exception.PoliceException;
@@ -33,10 +34,56 @@ public class PoliceDaoImpl implements PoliceDao {
 				res = 1;
 			}
 		}catch(SQLException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
+			
 			throw new PoliceException("Error inserting data");
 		}
 		return res;
 	}
 
+	@Override
+	public boolean policeLogin(int policeID, String password) throws PoliceException {
+		// TODO Auto-generated method stub
+		boolean res = false;
+		try(Connection conn =  DBUtil.provideConnection()){
+			PreparedStatement ps = conn.prepareStatement("select * from police_records where Police_ID = ?");
+			ps.setInt(1, policeID);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				
+				String dbPass = rs.getString("Password");
+				if(password.equals(dbPass)) {
+					res = true;
+					System.out.println("Login Successfull!"); 
+					
+					policeSubMenu();
+				}else {
+					System.out.println("Wrong Password!");
+				}
+			}else {
+				
+			}
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+			throw new PoliceException("Data Not Found!");
+		}
+		return res;
+	}
+	
+	public void policeSubMenu() {
+		
+		System.out.println("=================================");
+		System.out.println("| 1. Register a New Crime       |");
+		System.out.println("| 2. Register a New Criminal    |");
+		System.out.println("| 3. Resgister a Victim         |");
+		System.out.println("| 4. Update a Crime Status      |");
+		System.out.println("| 5. Search Crime or Criminal   |");
+		System.out.println("| 6. Generate Report            |");
+		System.out.println("=================================");
+		
+	}
+	
 }

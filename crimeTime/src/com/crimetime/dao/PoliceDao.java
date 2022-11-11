@@ -5,4 +5,5 @@ import com.crimetime.model.Police;
 
 public interface PoliceDao {
 	public int addPolice(Police police) throws PoliceException;
+	public boolean policeLogin(int policeID,String password) throws PoliceException;
 }

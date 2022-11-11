@@ -2,10 +2,11 @@ package com.crimetime.usecases;
 
 import java.util.Scanner;
 
+import com.crimetime.exception.PoliceException;
 import com.crimetime.model.Police;
 
 public class MainApp {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws PoliceException {
 		
 		//welcome message
 		System.out.println("Welcome To CrimeTime!"); 
@@ -23,9 +24,11 @@ public class MainApp {
 		
 		switch(input) {
 		case 1:
+			PoliceFunctions new_login = new PoliceFunctions();
+			new_login.policeLogin();
 			break;
 		case 2: 
-			AddPolice new_data = new AddPolice();
+			PoliceFunctions new_data = new PoliceFunctions();
 			new_data.AddPolice();
 			break;
 		case 3: 

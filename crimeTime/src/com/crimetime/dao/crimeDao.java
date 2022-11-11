@@ -1,12 +1,13 @@
 package com.crimetime.dao;
 
+import com.crimetime.exception.CrimeException;
 import com.crimetime.model.Crime;
 import com.crimetime.model.InvestigationDetails;
 
 public interface crimeDao {
 	
 	//add a new crime
-	public int addNewCrime(Crime crime);
+	public int addNewCrime(Crime crime) throws CrimeException;
 	
 	//update crime
 	public String updateCrimeStatus(int crimeID);
