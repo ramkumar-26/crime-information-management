@@ -10,7 +10,10 @@ public interface crimeDao {
 	public int addNewCrime(Crime crime) throws CrimeException;
 	
 	//update crime
-	public String updateCrimeStatus(int crimeID);
+	public String updateCrimeStatus(int crimeID,String Status) throws CrimeException;
+	
+	//link crime and criminal
+	public int linkCriminalWithCrime(InvestigationDetails id) throws CrimeException; 
 	
 	//display crime based on filter
 	public InvestigationDetails displayCrimeDetailsWithCrimeID(int crimeID);

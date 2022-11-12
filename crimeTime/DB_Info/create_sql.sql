@@ -12,7 +12,7 @@ Victim_Name VARCHAR(20),
 Victim_Address VARCHAR(30),
 Victim_Age int,
 Victim_Gender VARCHAR(10),
-Victim_Mobilenumber int
+Victim_Mobilenumber VARCHAR(10)
 );
 
 
@@ -33,6 +33,7 @@ CREATE TABLE Investigation_Details
 Investigation_ID INTEGER PRIMARY KEY,
 Crime_ID INTEGER,
 Criminal_ID INTEGER,
+status VARCHAR(10),
 Investigation_Officer_ID INTEGER,
 FOREIGN KEY(Crime_ID) REFERENCES Crime_Records(Crime_ID),
 FOREIGN KEY(Criminal_ID) REFERENCES Criminal_Records(Criminal_ID)

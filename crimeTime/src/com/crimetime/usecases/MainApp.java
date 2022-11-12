@@ -1,12 +1,13 @@
 package com.crimetime.usecases;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import com.crimetime.exception.PoliceException;
 import com.crimetime.model.Police;
 
 public class MainApp {
-	public static void main(String[] args) throws PoliceException {
+	public static void main(String[] args) throws PoliceException, IOException {
 		
 		//welcome message
 		System.out.println("Welcome To CrimeTime!"); 
