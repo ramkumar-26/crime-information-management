@@ -6,7 +6,7 @@ public class InvestigationDetails {
 	private int crime_id;
 	private int criminal_id;
 	private String investigation_status;
-	private int investigation_office_id;
+	private int investigation_officer_id;
 	public int getInvestigation_id() {
 		return investigation_id;
 	}
@@ -32,10 +32,10 @@ public class InvestigationDetails {
 		this.investigation_status = investigation_status;
 	}
 	public int getInvestigation_office_id() {
-		return investigation_office_id;
+		return investigation_officer_id;
 	}
 	public void setInvestigation_office_id(int investigation_office_id) {
-		this.investigation_office_id = investigation_office_id;
+		this.investigation_officer_id = investigation_office_id;
 	}
 	public InvestigationDetails(int investigation_id, int crime_id, int criminal_id, String investigation_status,
 			int investigation_office_id) {
@@ -44,13 +44,13 @@ public class InvestigationDetails {
 		this.crime_id = crime_id;
 		this.criminal_id = criminal_id;
 		this.investigation_status = investigation_status;
-		this.investigation_office_id = investigation_office_id;
+		this.investigation_officer_id = investigation_office_id;
 	}
 	@Override
 	public String toString() {
 		return "InvestigationBean [investigation_id=" + investigation_id + ", crime_id=" + crime_id + ", criminal_id="
 				+ criminal_id + ", investigation_status=" + investigation_status + ", investigation_office_id="
-				+ investigation_office_id + "]";
+				+ investigation_officer_id + "]";
 	}
 	
 	

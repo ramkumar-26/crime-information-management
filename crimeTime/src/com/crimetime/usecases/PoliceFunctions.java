@@ -1,17 +1,27 @@
 package com.crimetime.usecases;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+
+
 import java.util.Scanner;
 
 import com.crimetime.dao.PoliceDao;
 import com.crimetime.dao.PoliceDaoImpl;
 import com.crimetime.dao.crimeDao;
 import com.crimetime.dao.crimeDaoImpl;
+import com.crimetime.dao.criminalDao;
+import com.crimetime.dao.criminalDaoImpl;
 import com.crimetime.exception.CrimeException;
+import com.crimetime.exception.CriminalException;
 import com.crimetime.exception.PoliceException;
 import com.crimetime.model.Crime;
+import com.crimetime.model.Criminal;
+import com.crimetime.model.InvestigationDetails;
 import com.crimetime.model.Police;
 
 public class PoliceFunctions {
@@ -48,7 +58,7 @@ public class PoliceFunctions {
 		}
 	}
 	
-	public void  policeLogin() throws PoliceException {
+	public void  policeLogin() throws PoliceException, IOException {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter PoliceID:");
 		int police_id = sc.nextInt();
@@ -63,8 +73,6 @@ public class PoliceFunctions {
 			DisplayPoliceMenu();
 			
 			PoliceMainInput();
-			
-			
 			
 		}else {
 			throw new PoliceException("Login Failed!");
@@ -85,7 +93,7 @@ public class PoliceFunctions {
 		System.out.println("=====================================");
 	}
 	
-	public void PoliceMainInput() {
+	public void PoliceMainInput() throws IOException {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter Any Options:");
 		int input = sc.nextInt();
@@ -94,8 +102,10 @@ public class PoliceFunctions {
 			AddNewCrime();
 			break;
 		case 2:
+			
 			break;
 		case 3: 
+			AddNewCriminal();
 			break;
 		case 4:
 			break;
@@ -103,58 +113,159 @@ public class PoliceFunctions {
 			break;
 		
 		default:
-			throw new IllegalArgumentException("Unexpected value: "+ input);
+			System.out.println("Unexpeted Input");
+			PoliceMainInput();
 		}
 	}
 	
-	public void AddNewCrime() {	
+	public void AddNewCrime() throws IOException {	
 		
 		Scanner sc = new Scanner(System.in);
+		BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("==========================");
 		System.out.println("|  CRIME REGISTRATION!!  |");
 		System.out.println("==========================");
 		System.out.println("Enter Crime ID: ");
 		int crime_id = sc.nextInt();
-		System.out.println("Enter Crime Date(DD-MM-YYYY) :");
+		System.out.println("Enter Crime Date(YYYY-MM-DD) :");
 		String s_date = sc.next();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-		Date date=null;
-		try {
-			date = dateFormat.parse(s_date);
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		
 		System.out.println("Enter Short Description:");
-		String s_desc = sc.next();
+		String s_desc = br.readLine();
+		
+		
 		System.out.println("Enter Detailed Description: ");
-		String d_desc = sc.next();
+		String d_desc = br.readLine();
+		
+		
 		System.out.println("Enter Area of Crime:");
-		String areaOfCrime = sc.next();
+		String areaOfCrime = br.readLine();
+		
+		
 		System.out.println("Enter Police Station:");
-		String ps = sc.next();
+		String ps = br.readLine();
+		
+		
 		System.out.println("Enter Victim Name:");
-		String v_name = sc.next();
+		String v_name = br.readLine();
+		
 		System.out.println("Enter Victim Age:");
 		int v_age = sc.nextInt();
+		
+		
 		System.out.println("Enter Victim Gender:");
 		String v_gender = sc.next();
+		
+		
 		System.out.println("Enter Victim Mobile Number:");
-		int phone_no = sc.nextInt();
+		String phone_no = br.readLine();
+		
 		System.out.println("Enter Victim Address:");
-		String v_address = sc.next();
+		String v_address = br.readLine();
 		
-		
-		Crime crime = new Crime(crime_id, date, s_desc, d_desc, areaOfCrime, ps, v_name, v_age, v_gender, phone_no, v_address);
+		Crime crime = new Crime(crime_id, s_date, s_desc, d_desc, areaOfCrime, ps, v_name, v_age, v_gender, phone_no, v_address);
 		
 		crimeDao new_crime = new crimeDaoImpl();
 		try {
 			new_crime.addNewCrime(crime);
+			
+			//display back the menu
+			DisplayPoliceMenu();
+			PoliceMainInput();
 		}catch(CrimeException e){
-			
-			
+			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		
+	}
+	
+	
+	
+	public void AddNewCriminal() throws IOException {
+		Scanner sc = new Scanner(System.in);
+		BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("=============================");
+		System.out.println("|  CRIMINAL REGISTRATION!!  |");
+		System.out.println("=============================");
+		System.out.println("Enter Criminal ID: ");
+		int criminal_id = sc.nextInt();
+		
+		
+		System.out.println("Enter Criminal Name:");
+		String s_name = br.readLine();
+		
+		
+		System.out.println("Enter Criminal Age: ");
+		int c_age = sc.nextInt();
+		
+		
+		System.out.println("Enter Criminal Gender:");
+		String gender = br.readLine();
+		
+		
+		System.out.println("Enter marks in criminal face:");
+		String fm = br.readLine();
+		
+		
+		System.out.println("Enter First Arrest Place:");
+		String arrestLocation = sc.next();
+		
+		Criminal criminal = new Criminal(criminal_id, s_name, c_age, gender, fm, arrestLocation);
+		
+		
+		
+		criminalDao dao = new criminalDaoImpl();
+		try {
+			dao.addNewCriminal(criminal);
+			
+			//display back the menu
+			DisplayPoliceMenu();
+			PoliceMainInput();
+			
+		}catch(CriminalException e){
+			System.out.println(e.getMessage());
+			
+		}
+	}
+	
+	public void LinkCrimeToCriminal() {
+		Scanner sc = new Scanner(System.in); 
+		System.out.println("Enter Investigation ID:");
+		int in_id = sc.nextInt();
+		System.out.println("Enter Crime ID:");
+		int crime_id = sc.nextInt();
+		System.out.println("Enter Criminal ID to be linked with Crime "+crime_id+":");
+		int criminal_id=sc.nextInt();
+		System.out.println("Investigation Officer ID:");
+		int officer_id = sc.nextInt();
+		
+		
+		InvestigationDetails id = new InvestigationDetails(in_id, crime_id, criminal_id, "Unsolved", officer_id);
+		
+		crimeDao dao = new crimeDaoImpl();
+		try {
+			dao.linkCriminalWithCrime(id);
+		} catch (CrimeException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
+		
+	}
+	
+	public void UpdateCrimeStatus() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter Crime ID:");
+		int crime_id = sc.nextInt();
+		System.out.println("Enter Crime Status to be changed(Solved or Unsolved:");
+		String status = sc.next();
+		
+		
+		crimeDao dao = new crimeDaoImpl();
+		try {
+			dao.updateCrimeStatus(crime_id, status);
+		}catch(CrimeException e) {
+			
+		}
 		
 		
 	}

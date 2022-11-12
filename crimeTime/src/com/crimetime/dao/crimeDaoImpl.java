@@ -1,7 +1,7 @@
 package com.crimetime.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -18,10 +18,11 @@ public class crimeDaoImpl implements crimeDao {
 		int res = 0;
 		
 		try(Connection conn =  DBUtil.provideConnection()){
-			PreparedStatement ps = conn.prepareStatement("insert into crime values (?,?,?,?,?,?,?,?,?,?,?)");
+			PreparedStatement ps = conn.prepareStatement("insert into crime_records values (?,?,?,?,?,?,?,?,?,?,?)");
 			
 			ps.setInt(1, crime.getCrime_id());
-			ps.setDate(2, (Date) crime.getCrime_date());
+			//ps.setString(2, crime.getCrime_date());
+			ps.setDate(2, java.sql.Date.valueOf(crime.getCrime_date()) );
 			ps.setString(3, crime.getShort_desc());
 			ps.setString(4, crime.getDetailed_desc());
 			ps.setString(5, crime.getArea_of_crime());
@@ -30,7 +31,7 @@ public class crimeDaoImpl implements crimeDao {
 			ps.setString(8, crime.getV_address());
 			ps.setInt(9, crime.getV_age());
 			ps.setString(10, crime.getV_gender());
-			ps.setInt(11, crime.getV_mobileNumber());
+			ps.setString(11, crime.getV_mobileNumber());
 			
 			
 			int x = ps.executeUpdate();
@@ -44,16 +45,30 @@ public class crimeDaoImpl implements crimeDao {
 			
 			
 		}catch(SQLException e) {
-			
+			e.printStackTrace();
+		
 		}
 		
 		return res;
 	}
 
 	@Override
-	public String updateCrimeStatus(int crimeID) {
+	public String updateCrimeStatus(int crimeID,String status) {
 		// TODO Auto-generated method stub
-		return null;
+		String res = null ;
+		
+
+		try(Connection conn =  DBUtil.provideConnection()){
+			PreparedStatement ps = conn.prepareStatement("update investigation_records set status = ? where crime_id = ?");
+			
+			ps.setString(1, status);
+			ps.setInt(2, crimeID);
+			
+		}catch(SQLException e) {
+			
+		}
+		
+		return res;
 	}
 
 	@Override
@@ -90,6 +105,35 @@ public class crimeDaoImpl implements crimeDao {
 	public Crime displayUnsolvedCrime() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public int linkCriminalWithCrime(InvestigationDetails id) throws CrimeException {
+		// TODO Auto-generated method stub
+		int res = 0;
+
+		try(Connection conn =  DBUtil.provideConnection()){
+			PreparedStatement ps = conn.prepareStatement("insert into investigation_details values (?,?,?,?,?)");
+			ps.setInt(1, id.getInvestigation_id());
+			ps.setInt(2, id.getCrime_id());
+			ps.setInt(3, id.getCriminal_id());
+			ps.setString(4, id.getInvestigation_status());
+			ps.setInt(5, id.getInvestigation_office_id());
+			
+			int x = ps.executeUpdate();
+			
+			if(x>0) {
+				System.out.println("Criminal "+id.getCrime_id()+" Linked with crime "+id.getCrime_id());
+			}else {
+				throw new CrimeException("Error Linking crime with criminal");
+			}
+			
+		}catch(SQLException e) {	
+			e.printStackTrace();
+		}
+		
+		
+		return res;
 	}
 
 }
