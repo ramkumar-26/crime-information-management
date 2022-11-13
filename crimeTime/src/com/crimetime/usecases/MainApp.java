@@ -42,6 +42,7 @@ public class MainApp {
 			System.out.println("Wrong Input");
 			mainMenu();
 			homePageInput();
+			break;
 		}
 	}
 	

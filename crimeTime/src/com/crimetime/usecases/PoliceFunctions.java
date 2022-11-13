@@ -24,7 +24,33 @@ import com.crimetime.model.InvestigationDetails;
 import com.crimetime.model.Police;
 
 public class PoliceFunctions {
-	public  void AddPolice() {
+	
+	//police Login
+	public void  policeLogin() throws PoliceException, IOException {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter PoliceID:");
+		int police_id = sc.nextInt();
+		System.out.println("Enter Password:");
+		String password = sc.next();
+		
+		PoliceDao dao = new PoliceDaoImpl();
+		try {
+		boolean res = dao.policeLogin(police_id, password);
+		if(res) {
+			System.out.println("Login Successful!");
+			DisplayPoliceMenu();
+			PoliceMainInput();
+			
+		 }
+		}catch(PoliceException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		
+	}
+	
+	//add police
+	public  void AddPolice() throws PoliceException, IOException {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("POLICE REGISTRATION");
 		System.out.println("Enter Police ID:");
@@ -55,30 +81,11 @@ public class PoliceFunctions {
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
 		}
+		MainApp m = new MainApp();
+		m.mainMenu();
+		m.homePageInput();
 	}
 	
-	public void  policeLogin() throws PoliceException, IOException {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Enter PoliceID:");
-		int police_id = sc.nextInt();
-		System.out.println("Enter Password:");
-		String password = sc.next();
-		
-		PoliceDao dao = new PoliceDaoImpl();
-		try {
-		boolean res = dao.policeLogin(police_id, password);
-		if(res) {
-			System.out.println("Login Successful!");
-			DisplayPoliceMenu();
-			PoliceMainInput();
-			
-		 }
-		}catch(PoliceException e) {
-			System.out.println(e.getMessage());
-		}
-		
-		
-	}
 	
 	//police menu
 	public void DisplayPoliceMenu() {
@@ -96,6 +103,7 @@ public class PoliceFunctions {
 		System.out.println("========================================");
 	}
 	
+	//police input
 	public void PoliceMainInput() throws IOException, PoliceException {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter Any Options:");
@@ -143,28 +151,7 @@ public class PoliceFunctions {
 		}
 	}
 	
-	
-
-	public void GenerateReport() throws PoliceException, IOException {
-		
-		crimeDao dao = new crimeDaoImpl();
-		try {
-			String[] arr = dao.generateReport();
-			System.out.println("=================Report=============");
-			System.out.println("Total Number of Crime    :"+arr[0]);
-			System.out.println("Crime in Current Month   :"+arr[1]);
-			System.out.println("Unsolved Crime           :"+arr[2]);
-			System.out.println("Solved Crime             :"+arr[3]);
-			
-		}catch(CrimeException e) {
-			System.out.println(e.getMessage());
-		}
-		PressOneorTwo();
-		
-	}
-	
-	
-	
+	//add a new Crime
 	public void AddNewCrime() throws IOException, PoliceException {	
 		
 		Scanner sc = new Scanner(System.in);
@@ -227,6 +214,7 @@ public class PoliceFunctions {
 		
 	}
 	
+	//Add a new Criminal
 	public void AddNewCriminal() throws IOException, PoliceException {
 		Scanner sc = new Scanner(System.in);
 		BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
@@ -274,6 +262,7 @@ public class PoliceFunctions {
 		}
 	}
 	
+	//Link a new Criminal
 	public void LinkCrimeToCriminal() throws PoliceException, IOException {
 		Scanner sc = new Scanner(System.in); 
 		System.out.println("Enter Investigation ID:");
@@ -299,6 +288,7 @@ public class PoliceFunctions {
 		
 	}
 	
+	//update a crime status
 	public void UpdateCrimeStatus() throws PoliceException, IOException {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter Crime ID:");
@@ -317,6 +307,7 @@ public class PoliceFunctions {
 		
 	}
 	
+	//View all crime
 	public void DisplayAllCrime() throws PoliceException, IOException {
 		
 		crimeDao dao = new crimeDaoImpl();
@@ -345,6 +336,7 @@ public class PoliceFunctions {
 		
 	}
 	
+	//view all criminal
 	public void DisplayAllCriminal() throws PoliceException, IOException {
 		
 		criminalDao dao = new criminalDaoImpl();
@@ -372,6 +364,7 @@ public class PoliceFunctions {
 		
 	}
 	
+	//option to logout or previous  menu
 	public void PressOneorTwo() throws PoliceException, IOException {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("--------------------------------");
@@ -396,4 +389,22 @@ public class PoliceFunctions {
 		}
 	}
 	
+	//Generate Report
+	public void GenerateReport() throws PoliceException, IOException {
+		
+		crimeDao dao = new crimeDaoImpl();
+		try {
+			String[] arr = dao.generateReport();
+			System.out.println("=================Report=============");
+			System.out.println("Total Number of Crime    :"+arr[0]);
+			System.out.println("Crime in Current Month   :"+arr[1]);
+			System.out.println("Unsolved Crime           :"+arr[2]);
+			System.out.println("Solved Crime             :"+arr[3]);
+			
+		}catch(CrimeException e) {
+			System.out.println(e.getMessage());
+		}
+		PressOneorTwo();
+		
+	}
 }

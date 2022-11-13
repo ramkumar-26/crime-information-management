@@ -6,16 +6,28 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class DBUtil {
+	
+	  	private static String url;
+	    private static String driverName;
+	    private static String username;
+	    private static String password;
+	    
+	    static {
+	        
+	        ResourceBundle rb= ResourceBundle.getBundle("dbDetails");
+	        
+	        url= rb.getString("db.url");
+	        driverName= rb.getString("db.drivername");
+	        username= rb.getString("db.username");
+	        password= rb.getString("db.password");
+	        
+	        
+	    }
 public static Connection provideConnection() {
 		
 		Connection conn = null;
-		ResourceBundle rb= ResourceBundle.getBundle("dbDetails");
         
-        String url= rb.getString("db.url");
-        String driverName= rb.getString("db.drivername");
-        String username= rb.getString("db.username");
-        String password= rb.getString("db.password");
-		
+      
 		try {
 			Class.forName(driverName);
 		} catch (ClassNotFoundException e) {
