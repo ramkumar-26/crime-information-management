@@ -3,25 +3,31 @@ package com.crimetime.utility;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 public class DBUtil {
 public static Connection provideConnection() {
 		
 		Connection conn = null;
-		
+		ResourceBundle rb= ResourceBundle.getBundle("dbDetails");
+        
+        String url= rb.getString("db.url");
+        String driverName= rb.getString("db.drivername");
+        String username= rb.getString("db.username");
+        String password= rb.getString("db.password");
 		
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
+			Class.forName(driverName);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		
-		String url= "jdbc:mysql://localhost:3306/crimeTime";
+		
 		
 		try {
-			conn = DriverManager.getConnection(url, "root", "root");
+			conn = DriverManager.getConnection(url, username, password);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -1,0 +1,7 @@
+package com.crimetime.dao;
+
+import com.crimetime.model.Police;
+
+public interface PoliceDao {
+	public int addPolice(Police police);
+}

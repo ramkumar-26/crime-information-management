@@ -1,0 +1,12 @@
+package com.crimetime.dao;
+
+import com.crimetime.model.Criminal;
+
+public interface criminalDao {
+	
+	//add a new criminal
+	public int addNewCriminal(Criminal c); 
+	
+	
+	
+}

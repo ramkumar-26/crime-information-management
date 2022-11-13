@@ -1,0 +1,13 @@
+package com.crimetime.dao;
+
+import com.crimetime.model.Criminal;
+
+public class criminalDaoImpl implements criminalDao {
+	
+
+	@Override
+	public int addNewCriminal(Criminal c) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+}

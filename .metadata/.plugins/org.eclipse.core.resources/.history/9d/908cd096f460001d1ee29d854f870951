@@ -1,0 +1,75 @@
+package com.crimetime.usecases;
+
+import java.util.Scanner;
+
+public class MainApp {
+	public static void main(String[] args) {
+		
+		//welcome message
+		System.out.println("Welcome To CrimeTime!"); 
+		System.out.println("One place to manage all the Crimes and Criminals!!");
+		
+		Scanner sc = new Scanner(System.in);
+		
+		boolean flag=true;
+		while(flag==true) {
+		//display main menu
+		mainMenu();
+		
+		System.out.println("Enter any Option:");
+		int input = sc.nextInt();
+		
+		switch(input) {
+		case 1:
+			System.out.println("Enter Username: ");
+			String username = sc.next();
+			System.out.println("Enter Password:");
+			String password = sc.next();
+			if(username.equals("admin") && password.equals("admin")) {
+				System.out.println("Login Successfull!");
+				//admin menu
+				adminMenu();
+				
+			}else {
+				
+				System.out.println("Login Denied! Wrong Credentials!");
+			}
+			break;
+			
+		case 2:
+			break;
+		case 3:
+			System.out.println("Enter the following details to get access to CrimeTime!");
+			
+			break;
+		case 4:
+			flag = false;
+			break;
+			
+		}
+	}
+			
+	}
+	
+	public static void mainMenu() {
+		System.out.println("========================================");
+		System.out.println("|	      CrimeTime		       |");
+		System.out.println("========================================");
+		System.out.println("|  1.Admin Login                       |");
+		System.out.println("|  2.Police Inspector Login            |");
+		System.out.println("|  3.New Inspector Register            |");
+		System.out.println("|  4.Exit                              |");
+		System.out.println("========================================");
+	}
+	
+	public static void adminMenu() {
+		System.out.println("Hi, Admin!");
+		System.out.println("====================");
+		System.out.println("| 1. Grant Access  |");
+		System.out.println("| 2. Revoke Access |");
+		System.out.println("====================");
+		
+		
+	}
+	
+}

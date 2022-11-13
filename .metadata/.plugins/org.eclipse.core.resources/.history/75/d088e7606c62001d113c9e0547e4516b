@@ -1,0 +1,9 @@
+package com.crimetime.exception;
+
+public class CriminalException {
+	public CriminalException(String s) {
+		// TODO Auto-generated constructor stub
+		super(s);
+		
+	}
+}

@@ -1,0 +1,17 @@
+package com.crimetime.dao;
+
+import com.crimetime.model.Crime;
+import com.crimetime.model.InvestigationDetails;
+
+public interface crimeDao {
+	
+	
+	public int addNewCrime(Crime crime);
+	public int searchCrime(int crimeID);
+	public String updateCrimeStatus(int crimeID);
+	public InvestigationDetails displayCrimeDetailsWithCrimeID(int crimeID);
+	public InvestigationDetails displayAllCrimeDetails();
+	//public Investigation 
+	
+	
+}

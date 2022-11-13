@@ -1,0 +1,11 @@
+package com.crimetime.dao;
+
+
+
+public class criminalDaoImpl implements criminalDao {
+	
+	public int addNewCriminal(Criminal c) {
+		return 0;
+		
+	}
+}

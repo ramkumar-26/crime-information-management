@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="com.crimetime.model.Investigation"/>
+    <fullyQualifiedTypeName name="com.crimetime.model.InvestigationDetails"/>
+    <fullyQualifiedTypeName name="com.crimetime.usecases.AdminLogin"/>
+    <fullyQualifiedTypeName name="com.crimetime.dao.PoliceDao"/>
+    <fullyQualifiedTypeName name="com.crimetime.model.Police"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
+    <fullyQualifiedTypeName name="java.sql.SQLException"/>
+    <fullyQualifiedTypeName name="java.lang.StringIndexOutOfBoundsException"/>
+    <fullyQualifiedTypeName name="com.crimetime.dao.crimeDao"/>
+    <fullyQualifiedTypeName name="com.crimetime.dao.crimeDaoImpl"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="com.crimetime.model.Criminal"/>
+    <fullyQualifiedTypeName name="com.crimetime.dao.criminalDao"/>
+    <fullyQualifiedTypeName name="com.crimetime.dao.criminalDaoImpl"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="com.crimetime.usecases.SearchFuntions"/>
+    <fullyQualifiedTypeName name="com.crimetime.exception.CriminalException"/>
+    <fullyQualifiedTypeName name="com.crimetime.model.Crime"/>
+    <fullyQualifiedTypeName name="com.crimetime.usecases.PoliceFunctions"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="java.sql.ResultSet"/>
+    <fullyQualifiedTypeName name="java.lang.Exception"/>
+    <fullyQualifiedTypeName name="com.crimetime.usecases.MainApp"/>
+    <fullyQualifiedTypeName name="com.crimetime.exception.CrimeException"/>
+    <fullyQualifiedTypeName name="java.util.ResourceBundle"/>
+</qualifiedTypeNameHistroy>

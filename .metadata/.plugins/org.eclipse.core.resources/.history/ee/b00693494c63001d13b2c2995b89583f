@@ -1,0 +1,257 @@
+package com.crimetime.dao;
+
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.crimetime.exception.CrimeException;
+import com.crimetime.exception.CriminalException;
+import com.crimetime.model.Crime;
+import com.crimetime.model.Criminal;
+import com.crimetime.model.InvestigationDetails;
+import com.crimetime.utility.DBUtil;
+
+public class crimeDaoImpl implements crimeDao {
+	
+	
+	public List<Criminal> CriminalsLinkedWithCrime(int crimeID){
+		List<Criminal> c = new ArrayList<>();
+		
+		try(Connection conn =  DBUtil.provideConnection()){
+			
+			
+			//getting criminal list
+			PreparedStatement ps = conn.prepareStatement("select criminal_id from investigation where crime_id=?");
+			ps.setInt(1, crimeID);
+			
+			ResultSet rs = ps.executeQuery();
+			List<Integer> cid_list = new ArrayList<>();
+			boolean flag = false;
+			while(rs.next()) {
+				flag = true;
+				cid_list.add(rs.getInt("criminal_id"));
+			}
+			
+			if(flag==false) {
+				throw new CriminalException("No Criminal Found!");
+			}
+			
+			
+			for(int i=0;i<cid_list.size();i++) {
+				
+				PreparedStatement ps2 = conn.prepareStatement("select criminal_id from investigation where crime_id=?");
+				ps2.setInt(1, cid_list.get(i));
+				
+				ResultSet rs2 = ps2.executeQuery();
+				
+				if(rs2.next()) {
+					int criminal_id = rs.getInt("criminal_id");
+					String Criminal_Name = rs.getString("Criminal_Name");
+					int Age = rs.getInt("Age");
+					String gender = rs.getString("Gender");
+					String mark_in_face = rs.getString("Mark_In_Face");
+					String arrestLocation = rs.getString("First_Arrest_Place");
+					c.add(new Criminal(criminal_id, Criminal_Name, Age, gender, mark_in_face, arrestLocation));
+				}
+			}
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return c;
+		
+	}
+	
+	
+
+	@Override
+	public int addNewCrime(Crime crime) throws CrimeException {
+		// TODO Auto-generated method stub
+		int res = 0;
+		
+		try(Connection conn =  DBUtil.provideConnection()){
+			PreparedStatement ps = conn.prepareStatement("insert into crime_records values (?,?,?,?,?,?,?,?,?,?,?)");
+			
+			ps.setInt(1, crime.getCrime_id());
+			//ps.setString(2, crime.getCrime_date());
+			ps.setDate(2, java.sql.Date.valueOf(crime.getCrime_date()) );
+			ps.setString(3, crime.getShort_desc());
+			ps.setString(4, crime.getDetailed_desc());
+			ps.setString(5, crime.getArea_of_crime());
+			ps.setString(6, crime.getPolicestation_code());
+			ps.setString(7, crime.getVictim_name());
+			ps.setString(8, crime.getV_address());
+			ps.setInt(9, crime.getV_age());
+			ps.setString(10, crime.getV_gender());
+			ps.setString(11, crime.getV_mobileNumber());
+			
+			
+			int x = ps.executeUpdate();
+			
+			if(x>0) {
+				System.out.println("Crime Added with Crime ID "+crime.getCrime_id());
+				
+			}else {
+				throw new CrimeException("Error Adding Crime!");
+			}
+			
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		
+		}
+		
+		return res;
+	}
+
+	@Override
+	public String updateCrimeStatus(int crimeID,String status) {
+		// TODO Auto-generated method stub
+		String res = null ;
+		
+
+		try(Connection conn =  DBUtil.provideConnection()){
+			PreparedStatement ps = conn.prepareStatement("update investigation_records set status = ? where crime_id = ?");
+			
+			ps.setString(1, status);
+			ps.setInt(2, crimeID);
+			
+		}catch(SQLException e) {
+			
+		}
+		
+		return res;
+	}
+
+	@Override
+	public Crime displayCrimeDetailsWithCrimeID(int crimeID) throws CrimeException {
+		// TODO Auto-generated method stub
+		Crime c = null;
+		
+		try(Connection conn =  DBUtil.provideConnection()){
+			PreparedStatement ps = conn.prepareStatement("select * from crime_records where crime_id = ?");
+			ps.setInt(1, crimeID);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				
+				int crime_id=rs.getInt("crime_id");
+				String date = ""+ rs.getDate("crimeDate");
+				String shortDesc = rs.getString("ShortDesc");
+				String detailedDesc = rs.getString("DetailedDesc");
+				String AreaOfCrime = rs.getString("AreaOfCrime");
+				String police_station = rs.getString("PoliceStation_Code");
+				String Victim_Name = rs.getString("Victim_Name");
+				String Victim_Address = rs.getString("Victim_Address");
+				String Victim_Age = rs.getString("Victim_Age");
+				String Victim_Gender = rs.getString("Victim_Gender");
+				String Victim_Mobilenumber = rs.getString("Victim_Mobilenumber");
+				
+				c = new Crime(crime_id, date, AreaOfCrime, detailedDesc, police_station, Victim_Age, Victim_Name, crime_id, Victim_Gender, Victim_Mobilenumber, 
+						Victim_Address);
+				
+				
+			}else {
+				throw new CrimeException("No Data found for Given Crime ID!");
+			}
+			
+			
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return c;
+	}
+
+	@Override
+	public List<Crime> displayAllCrimeDetails() throws CrimeException {
+		// TODO Auto-generated method stub
+		List<Crime> c = new ArrayList<>();
+		
+		try(Connection conn =  DBUtil.provideConnection()){
+			PreparedStatement ps = conn.prepareStatement("select * from crime_records");
+			ResultSet rs = ps.executeQuery();
+			boolean flag = false; 
+			while(rs.next()) {
+				flag = true;
+				c.add(new Crime(rs.getInt("Crime_ID"), rs.getString("CrimeDate"), rs.getString("ShortDesc"), rs.getString("DetailedDesc"),  rs.getString("AreaOfCrime"),
+						rs.getString("PoliceStation_Code"), rs.getString("Victim_Name"), rs.getInt("Victim_Age"),
+						rs.getString("Victim_Gender"), rs.getString("Victim_Mobilenumber"), rs.getString("Victim_Address")));
+			}
+			
+			if(flag==false) {
+				throw new CrimeException("Empty Records!");
+			}
+		}catch (SQLException e) {
+			// TODO: handle exception
+			System.err.println(e.getMessage());
+		}
+		return c;
+	}
+
+	@Override
+	public InvestigationDetails displayPoliceStationWiseCrime(String policeStationID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InvestigationDetails displayAreaWiseCrime(String location) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Crime displaySolvedCrime() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Crime displayUnsolvedCrime() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int linkCriminalWithCrime(InvestigationDetails id) throws CrimeException {
+		// TODO Auto-generated method stub
+		int res = 0;
+
+		try(Connection conn =  DBUtil.provideConnection()){
+			PreparedStatement ps = conn.prepareStatement("insert into investigation_details values (?,?,?,?,?)");
+			ps.setInt(1, id.getInvestigation_id());
+			ps.setInt(2, id.getCrime_id());
+			ps.setInt(3, id.getCriminal_id());
+			ps.setString(4, id.getInvestigation_status());
+			ps.setInt(5, id.getInvestigation_office_id());
+			
+			int x = ps.executeUpdate();
+			
+			if(x>0) {
+				System.out.println("Criminal "+id.getCrime_id()+" Linked with crime "+id.getCrime_id());
+			}else {
+				throw new CrimeException("Error Linking crime with criminal");
+			}
+			
+		}catch(SQLException e) {	
+			e.printStackTrace();
+		}
+		
+		
+		return res;
+	}
+
+
+
+	@Override
+	public String getCrimeStatus(int crimeID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

@@ -1,0 +1,40 @@
+package com.crimetime.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import com.crimetime.exception.CrimeException;
+import com.crimetime.exception.CriminalException;
+import com.crimetime.model.Criminal;
+import com.crimetime.utility.DBUtil;
+
+public class criminalDaoImpl implements criminalDao {
+	
+
+	@Override
+	public int addNewCriminal(Criminal c) throws CriminalException {
+		// TODO Auto-generated method stub
+		int res = 0;
+		try(Connection conn =  DBUtil.provideConnection()){
+			PreparedStatement ps = conn.prepareStatement("insert into crime_records values (?,?,?,?,?,?)");
+			ps.setInt(1, c.getCriminal_id());
+			ps.setString(2, c.getCriminal_name());
+			ps.setInt(3, c.getAge());
+			ps.setString(4, c.getMarkInFace());
+			ps.setString(5, c.getFirstArrestPlace());
+				throw new CriminalException("Error Adding Crime!");
+			
+			
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		
+		}
+		
+		
+		
+		
+		return res;
+	}
+}

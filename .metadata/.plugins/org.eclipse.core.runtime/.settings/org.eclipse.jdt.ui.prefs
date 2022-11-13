@@ -1,0 +1,10 @@
+content_assist_lru_history=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><history maxLHS\="100" maxRHS\="10"><lhs name\="com.crimetime.usecases.AdminLogin"><rhs name\="com.crimetime.usecases.AdminLogin"/></lhs><lhs name\="com.crimetime.model.Crime"><rhs name\="com.crimetime.model.Crime"/></lhs><lhs name\="com.crimetime.dao.crimeDao"><rhs name\="com.crimetime.dao.crimeDaoImpl"/></lhs><lhs name\="java.util.Collection"><rhs name\="java.util.ArrayList"/></lhs><lhs name\="java.lang.Iterable"><rhs name\="java.util.ArrayList"/></lhs><lhs name\="java.util.List"><rhs name\="java.util.ArrayList"/></lhs><lhs name\="com.crimetime.model.Criminal"><rhs name\="com.crimetime.model.Criminal"/></lhs><lhs name\="com.crimetime.dao.criminalDao"><rhs name\="com.crimetime.dao.criminalDaoImpl"/></lhs><lhs name\="com.crimetime.usecases.SearchFuntions"><rhs name\="com.crimetime.usecases.SearchFuntions"/></lhs><lhs name\="com.crimetime.usecases.PoliceFunctions"><rhs name\="com.crimetime.usecases.PoliceFunctions"/></lhs><lhs name\="java.lang.CharSequence"><rhs name\="java.lang.String"/></lhs><lhs name\="java.lang.constant.Constable"><rhs name\="java.lang.String"/></lhs><lhs name\="java.lang.constant.ConstantDesc"><rhs name\="java.lang.String"/></lhs><lhs name\="com.crimetime.usecases.MainApp"><rhs name\="com.crimetime.usecases.MainApp"/></lhs></history>
+content_assist_number_of_computers=15
+content_assist_proposals_background=241,241,241
+content_assist_proposals_foreground=0,0,0
+eclipse.preferences.version=1
+org.eclipse.jdt.ui.formatterprofiles.version=22
+spelling_locale_initialized=true
+typefilter_migrated_2=true
+useAnnotationsPrefPage=true
+useQuickDiffPrefPage=true

@@ -1,0 +1,23 @@
+package com.crimetime.usecases;
+
+import java.util.Scanner;
+
+import com.crimetime.dao.crimeDao;
+import com.crimetime.dao.crimeDaoImpl;
+import com.crimetime.exception.CrimeException;
+import com.crimetime.model.Crime;
+
+public class SearchFuntions {
+	public void CrimeWithCrimeID() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter Crime ID:");
+		int input = sc.nextInt();
+		crimeDao dao = new crimeDaoImpl();
+		try {
+			Crime c = dao.displayCrimeDetailsWithCrimeID(input);
+		} catch (CrimeException e) {
+			// TODO Auto-generated catch block
+			System.err.println(e.getMessage());
+		}
+	}
+}

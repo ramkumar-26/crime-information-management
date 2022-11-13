@@ -1,0 +1,9 @@
+package com.crimetime.dao;
+
+public interface crimeDao {
+	
+	
+	public int addNewCrime(Crime crime);
+	
+	
+}

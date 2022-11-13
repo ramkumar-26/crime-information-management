@@ -1,0 +1,5 @@
+INDEX VERSION 1.131+C:\Users\91638\Desktop\-determined-squirrel-6475\.metadata\.plugins\org.eclipse.jdt.core
+2328353390.index
+3729596628.index
+1865797976.index
+2924372101.index

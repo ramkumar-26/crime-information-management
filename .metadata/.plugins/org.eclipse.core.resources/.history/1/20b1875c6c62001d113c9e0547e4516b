@@ -1,0 +1,5 @@
+package com.crimetime.exception;
+
+public class CriminalException {
+
+}
