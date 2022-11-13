@@ -155,12 +155,11 @@ public class crimeDaoImpl implements crimeDao {
 				String police_station = rs.getString("PoliceStation_Code");
 				String Victim_Name = rs.getString("Victim_Name");
 				String Victim_Address = rs.getString("Victim_Address");
-				String Victim_Age = rs.getString("Victim_Age");
+				int Victim_Age = rs.getInt("Victim_Age");
 				String Victim_Gender = rs.getString("Victim_Gender");
 				String Victim_Mobilenumber = rs.getString("Victim_Mobilenumber");
 				
-				c = new Crime(crime_id, date, AreaOfCrime, detailedDesc, police_station, Victim_Age, Victim_Name, crime_id, Victim_Gender, Victim_Mobilenumber, 
-						Victim_Address);
+			   c = new Crime(crime_id, date, shortDesc, detailedDesc, AreaOfCrime, police_station, Victim_Name, Victim_Age, Victim_Gender, Victim_Mobilenumber, Victim_Address);
 				
 				
 			}else {
