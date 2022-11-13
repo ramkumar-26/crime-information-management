@@ -13,13 +13,16 @@ public class MainApp {
 		System.out.println("Welcome To CrimeTime!"); 
 		System.out.println("One place to manage all the Crimes and Criminals!!");
 		
+		MainApp m = new MainApp();
+		
+		m.mainMenu(); 
+		m.homePageInput();
+		
+	}
+		
+	
+	public  void homePageInput() throws PoliceException, IOException {
 		Scanner sc = new Scanner(System.in);
-		
-		boolean flag=true;
-		while(flag==true) {
-		//display main menu
-		mainMenu(); 
-		
 		System.out.println("Enter any Option:");
 		int input = sc.nextInt();
 		
@@ -33,14 +36,16 @@ public class MainApp {
 			new_data.AddPolice();
 			break;
 		case 3: 
-			break;
-			
+			System.out.println("Thank You! (Exited)");
+			return;
+		default:
+			System.out.println("Wrong Input");
+			mainMenu();
+			homePageInput();
 		}
 	}
-			
-	}
 	
-	public static void mainMenu() {
+	public  void mainMenu() {
 		System.out.println("========================================");
 		System.out.println("|	      CrimeTime		       |");
 		System.out.println("========================================");

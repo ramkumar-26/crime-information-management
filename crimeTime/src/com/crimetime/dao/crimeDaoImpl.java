@@ -1,16 +1,72 @@
 package com.crimetime.dao;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.crimetime.exception.CrimeException;
+import com.crimetime.exception.CriminalException;
 import com.crimetime.model.Crime;
+import com.crimetime.model.Criminal;
 import com.crimetime.model.InvestigationDetails;
 import com.crimetime.utility.DBUtil;
 
 public class crimeDaoImpl implements crimeDao {
+	
+	
+	public List<Criminal> CriminalsLinkedWithCrime(int crimeID){
+		List<Criminal> c = new ArrayList<>();
+		
+		try(Connection conn =  DBUtil.provideConnection()){
+			
+			
+			//getting criminal list
+			PreparedStatement ps = conn.prepareStatement("select criminal_id from investigation_details where crime_id=?");
+			ps.setInt(1, crimeID);
+			
+			ResultSet rs = ps.executeQuery();
+			List<Integer> cid_list = new ArrayList<>();
+			boolean flag = false;
+			while(rs.next()) {
+				flag = true;
+				cid_list.add(rs.getInt("criminal_id"));
+			}
+			
+			if(flag==false) {
+				throw new CriminalException("No Criminal Found!");
+			}
+			
+			
+			for(int i=0;i<cid_list.size();i++) {
+				
+				PreparedStatement ps2 = conn.prepareStatement("select * from criminal_records where criminal_id=?");
+				ps2.setInt(1, cid_list.get(i));
+				
+				ResultSet rs2 = ps2.executeQuery();
+				
+				if(rs2.next()) {
+					int criminal_id = rs2.getInt("criminal_id");
+					String Criminal_Name = rs2.getString("Criminal_Name");
+					int Age = rs2.getInt("Age");
+					String gender = rs2.getString("Gender");
+					String mark_in_face = rs2.getString("Mark_In_Face");
+					String arrestLocation = rs2.getString("First_Arrest_Place");
+					c.add(new Criminal(criminal_id, Criminal_Name, Age, gender, mark_in_face, arrestLocation));
+				}
+			}
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		return c;
+		
+	}
+	
+	
 
 	@Override
 	public int addNewCrime(Crime crime) throws CrimeException {
@@ -53,59 +109,103 @@ public class crimeDaoImpl implements crimeDao {
 	}
 
 	@Override
-	public String updateCrimeStatus(int crimeID,String status) {
+	public String updateCrimeStatus(int crimeID,String status) throws CrimeException {
 		// TODO Auto-generated method stub
 		String res = null ;
 		
 
 		try(Connection conn =  DBUtil.provideConnection()){
-			PreparedStatement ps = conn.prepareStatement("update investigation_records set status = ? where crime_id = ?");
+			PreparedStatement ps = conn.prepareStatement("update investigation_details set status = ? where crime_id = ?");
 			
 			ps.setString(1, status);
 			ps.setInt(2, crimeID);
 			
-		}catch(SQLException e) {
+			int x = ps.executeUpdate();
+			if(x>0) {
+				res = "Updated Sucessfully!";
+			}else {
+				throw new CrimeException("Error Updating");
+			}
 			
+		}catch(SQLException e) {
+			System.out.println(e.getMessage());
 		}
 		
 		return res;
 	}
 
 	@Override
-	public InvestigationDetails displayCrimeDetailsWithCrimeID(int crimeID) {
+	public Crime displayCrimeDetailsWithCrimeID(int crimeID) throws CrimeException {
 		// TODO Auto-generated method stub
-		return null;
+		Crime c = null;
+		
+		try(Connection conn =  DBUtil.provideConnection()){
+			PreparedStatement ps = conn.prepareStatement("select * from crime_records where crime_id = ?");
+			ps.setInt(1, crimeID);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				
+				int crime_id=rs.getInt("crime_id");
+				String date = ""+ rs.getDate("crimeDate");
+				String shortDesc = rs.getString("ShortDesc");
+				String detailedDesc = rs.getString("DetailedDesc");
+				String AreaOfCrime = rs.getString("AreaOfCrime");
+				String police_station = rs.getString("PoliceStation_Code");
+				String Victim_Name = rs.getString("Victim_Name");
+				String Victim_Address = rs.getString("Victim_Address");
+				String Victim_Age = rs.getString("Victim_Age");
+				String Victim_Gender = rs.getString("Victim_Gender");
+				String Victim_Mobilenumber = rs.getString("Victim_Mobilenumber");
+				
+				c = new Crime(crime_id, date, AreaOfCrime, detailedDesc, police_station, Victim_Age, Victim_Name, crime_id, Victim_Gender, Victim_Mobilenumber, 
+						Victim_Address);
+				
+				
+			}else {
+				throw new CrimeException("No Data found for Given Crime ID!");
+			}
+			
+			
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return c;
 	}
 
 	@Override
-	public InvestigationDetails displayAllCrimeDetails() {
+	public List<Crime> displayAllCrimeDetails() throws CrimeException {
 		// TODO Auto-generated method stub
-		return null;
+		List<Crime> c = new ArrayList<>();
+		
+		try(Connection conn =  DBUtil.provideConnection()){
+			PreparedStatement ps = conn.prepareStatement("select * from crime_records");
+			ResultSet rs = ps.executeQuery();
+			boolean flag = false; 
+			while(rs.next()) {
+				flag = true;
+				c.add(new Crime(rs.getInt("Crime_ID"), rs.getString("CrimeDate"), rs.getString("ShortDesc"), rs.getString("DetailedDesc"),  rs.getString("AreaOfCrime"),
+						rs.getString("PoliceStation_Code"), rs.getString("Victim_Name"), rs.getInt("Victim_Age"),
+						rs.getString("Victim_Gender"), rs.getString("Victim_Mobilenumber"), rs.getString("Victim_Address")));
+			}
+			
+			if(flag==false) {
+				throw new CrimeException("Empty Records!");
+			}
+		}catch (SQLException e) {
+			// TODO: handle exception
+			System.err.println(e.getMessage());
+		}
+		return c;
 	}
 
-	@Override
-	public InvestigationDetails displayPoliceStationWiseCrime(String policeStationID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
-	@Override
-	public InvestigationDetails displayAreaWiseCrime(String location) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
-	@Override
-	public Crime displaySolvedCrime() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Crime displayUnsolvedCrime() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
 	public int linkCriminalWithCrime(InvestigationDetails id) throws CrimeException {
@@ -123,7 +223,7 @@ public class crimeDaoImpl implements crimeDao {
 			int x = ps.executeUpdate();
 			
 			if(x>0) {
-				System.out.println("Criminal "+id.getCrime_id()+" Linked with crime "+id.getCrime_id());
+				System.out.println("Criminal "+id.getCriminal_id()+" Linked with crime "+id.getCrime_id());
 			}else {
 				throw new CrimeException("Error Linking crime with criminal");
 			}
@@ -134,6 +234,77 @@ public class crimeDaoImpl implements crimeDao {
 		
 		
 		return res;
+	}
+
+
+
+	@Override
+	public String getCrimeStatus(int crimeID) {
+		// TODO Auto-generated method stub
+		String res = null;
+		try(Connection conn =  DBUtil.provideConnection()){
+			PreparedStatement ps = conn.prepareStatement("select status from investigation_details where crime_id = ?");
+			ps.setInt(1, crimeID);
+			ResultSet rs  = ps.executeQuery();
+			
+			if(rs.next()) {
+				res = rs.getString("status");
+			}else {
+				throw new CrimeException("Status Unavailable!");
+			}
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return res;
+	}
+
+
+
+	@Override
+	public String[] generateReport() throws CrimeException {
+		// TODO Auto-generated method stub
+		String[] report = new String[4];
+		
+		try(Connection conn =  DBUtil.provideConnection()){
+			PreparedStatement ps1 = conn.prepareStatement("select count(*) as count1 from investigation_details where status = ?");
+			ps1.setString(1, "Unsolved");
+			PreparedStatement ps2 = conn.prepareStatement("select count(*)  as count2 from investigation_details where status = ?");
+			ps2.setString(1, "Solved");
+			
+			PreparedStatement ps3 = conn.prepareStatement("select count(*)  as count3 from crime_records where MONTH(CrimeDate) = MONTH(CURRENT_DATE())");
+	
+			
+			PreparedStatement ps4 = conn.prepareStatement("select count(*) as count4 from crime_records");
+			
+			ResultSet rs1 = ps1.executeQuery();
+			rs1.next();
+			String unsolved = ""+ rs1.getInt("count1");
+			
+			ResultSet rs2 = ps2.executeQuery();
+			rs2.next();
+			String solved = ""+ rs2.getInt("count2");
+			
+			ResultSet rs3 = ps3.executeQuery();
+			rs3.next();
+			String month_crime = ""+ rs3.getInt("count3");
+			
+			ResultSet rs4 = ps4.executeQuery();
+			rs4.next();
+			String total_crime = ""+ rs4.getInt("count4");
+			
+			report[0] = total_crime;
+			report[1] = month_crime;
+			report[2] = unsolved;
+			report[3] = solved;
+			
+			
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			//e.printStackTrace();
+			throw new CrimeException("Error Generating Report!");
+		}
+			
+		return report;
 	}
 
 }
