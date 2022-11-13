@@ -3,6 +3,7 @@ package com.crimetime.model;
 import java.sql.Date;
 
 public class Crime {
+		
 		private int crime_id;
 		private String crime_date;
 		private String short_desc;
@@ -113,6 +114,12 @@ public class Crime {
 		}
 		
 		
-		
+		@Override
+		public String toString() {
+			return "Crime [crime_id=" + crime_id + ", crime_date=" + crime_date + ", short_desc=" + short_desc
+					+ ", detailed_desc=" + detailed_desc + ", area_of_crime=" + area_of_crime + ", policestation_code="
+					+ policestation_code + ", victim_name=" + victim_name + ", v_age=" + v_age + ", v_gender=" + v_gender
+					+ ", v_mobileNumber=" + v_mobileNumber + ", v_address=" + v_address + "]";
+		}
 		
 }

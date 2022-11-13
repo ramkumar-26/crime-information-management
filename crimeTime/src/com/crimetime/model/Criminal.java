@@ -46,11 +46,6 @@ public class Criminal {
 		FirstArrestPlace = firstArrestPlace;
 	}
 	
-	@Override
-	public String toString() {
-		return "CriminalBean [criminal_id=" + criminal_id + ", criminal_name=" + criminal_name + ", age=" + age
-				+ ", gender=" + gender + ", markInFace=" + markInFace + ", FirstArrestPlace=" + FirstArrestPlace + "]";
-	}
 	
 	public Criminal(int criminal_id, String criminal_name, int age, String gender, String markInFace,
 			String firstArrestPlace) {
@@ -61,6 +56,11 @@ public class Criminal {
 		this.gender = gender;
 		this.markInFace = markInFace;
 		FirstArrestPlace = firstArrestPlace;
+	}
+	@Override
+	public String toString() {
+		return "Criminal [criminal_id=" + criminal_id + ", criminal_name=" + criminal_name + ", age=" + age
+				+ ", gender=" + gender + ", markInFace=" + markInFace + ", FirstArrestPlace=" + FirstArrestPlace + "]";
 	}
 	
 	
