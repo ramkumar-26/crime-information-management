@@ -1,57 +1,25 @@
-<img src="https://readme-typing-svg.herokuapp.com?font=Architects+Daughter&amp;color=teal&amp;size=20&amp;lines=ONE+STORE+JAR;" style="width: 100%;">
+# Crime Information Management (Console Based)
+* Domain Description: 
+To live in a peaceful society, we need low crime rates and to reduce the crime rates we need police officers. 
+As a police officer, they need to manage all the crimes and criminals in a effective. To help those officers
+we need a "Crime Inforamtion Mangement" software. This is were our software kicks in and provide all the 
+neccessary functions to manage and maintain crimes as well criminals data.
 
-<h1 align="center">One-Store-Jar</h1>
-<h2 align="center">A Backend project providing Rest Api for online shopping application. The Api can perform all the crud operation with customer validation on every step.</h2>
-<br>
+* Type of User: Police Officer
 
-Project Type:- Group Project:
--------------
-<br>
+* Role of Police officer: -Login -Register -RegisterCrime -RegisterCriminal -LinkCriminal -UpdateStatus 
+-ViewCrime -ViewCriminal -GenerateReport 
 
-1-Ganesh Ganta ( Team Leader )
-<br>
+* Tables:
+Crime_Records:
+- Crime_ID, - CrimeDate, - ShortDesc, - DetailedDesc, - AreaOfCrime, - PoliceStationCode, - Victim_Name,
+- Victim_Age, - Victim_Address, - Victim_Gender, - Victim_MobileNumber
 
-2-Ramkumar
-<br>
+Crimina_Records:
+- Criminal_id, - Criminal_Name, - Age, - Gender, - Mark_In_Face, - First_Arrest_Place
 
-3-NITESH DILIP MESHRAM
-<br>
+Police_Records:
+- Police_id, - Name, - Reporting_PoliceStation, - Password, - Access_Status
 
-4-SACHIN DHARIWAL
-<br>
-
-5-Aman Verma
-
-<br>
-
-Technologies:
-- Spring Boot
-- Spring Data JPA (Hibernate)
-- Core Java
-- MySQL
-- Swagger-UI
-- Postman
-----------------------------
-Online Shopping Application :
-----------------------------
-Problem Statement:
-
-- This application is used by ABC Company admin and their Customer for online shopping 
-- This application will help Customer to buy the products and view order details.
-- Customer can register themselves and login. Add product to the cart and purchase it .
-- This application will help Admin to search Product list ,add new products ,remove products and update product .
-
-<h1>Entity Relationship Diagram</h1>
-
-<p align="center"><img  src="https://user-images.githubusercontent.com/105967008/208249871-40b0eb72-3733-49ed-9a37-036bc45cc78f.jpeg"></p>
-
-
-<h1>Modules</h1>
-<ul>
-<li><h3>Login Module</h3></li>
-  <li><h3>Customer Module</h3></li>
-  <li><h3>Product Module</h3></li>
-  <li><h3>Order Module</h3></li>
-  <li><h3>Cart Module</h3></li>
-</ul>
-
+Investigation_Details:
+- Investigation_ID, - Crime_ID, - Criminal_ID, - Status, - Investigation_Status
