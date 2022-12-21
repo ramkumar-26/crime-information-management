@@ -1,7 +1,7 @@
 # Crime Information Management (Console Based)
 * Domain Description: 
 To live in a peaceful society, we need low crime rates and to reduce the crime rates we need police officers. 
-As a police officer, they need to manage all the crimes and criminals in a effective. To help those officers
+As a police officer, they need to manage all the crimes and criminals in a effective way. To help those officers
 we need a "Crime Inforamtion Mangement" software. This is were our software kicks in and provide all the 
 neccessary functions to manage and maintain crimes as well criminals data.
 
