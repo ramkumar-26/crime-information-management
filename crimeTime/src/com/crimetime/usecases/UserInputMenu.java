@@ -1,7 +1,7 @@
 package com.crimetime.usecases;
 
 public class UserInputMenu {
-	public  void DisplayMainMenu() {
+	public  void displayMainMenu() {
 		System.out.println("========================================");
 		System.out.println("|	          CrimeTime		           |");
 		System.out.println("========================================");
@@ -11,7 +11,7 @@ public class UserInputMenu {
 		System.out.println("========================================");
 	}
 	
-	public void DisplayPoliceMenu() {
+	public void displayMenuAfterLogin() {
 		System.out.println("========================================");
 		System.out.println("| 1. Register a New Crime              |");
 		System.out.println("| 2. Register a new Criminal           |");
@@ -25,4 +25,6 @@ public class UserInputMenu {
 		System.out.println("|10. Logout                            |");
 		System.out.println("========================================");
 	}
+	
+	
 }

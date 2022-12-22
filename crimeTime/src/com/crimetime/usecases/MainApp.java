@@ -7,21 +7,23 @@ import com.crimetime.exception.PoliceException;
 import com.crimetime.model.Police;
 
 public class MainApp {
+	CrimeUsecases crime = new CrimeUsecases();
+	
 	public static void main(String[] args) throws PoliceException, IOException {
 		
-		//welcome message
+		
 		System.out.println("Welcome To CrimeTime!"); 
 		System.out.println("One place to manage all the Crimes and Criminals!!");
+		UserInputMenu menu_options = new UserInputMenu();
 		
-		MainApp m = new MainApp();
-		
-		m.mainMenu(); 
-		m.homePageInput();
+		menu_options.displayMainMenu();
+		homePageInput();
 		
 	}
 		
 	
-	public  void homePageInput() throws PoliceException, IOException {
+	public static  void homePageInput() throws PoliceException, IOException {
+		UserInputMenu menu_options = new UserInputMenu();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter any Option:");
 		int input = sc.nextInt();
@@ -40,22 +42,58 @@ public class MainApp {
 			return;
 		default:
 			System.out.println("Wrong Input");
-			mainMenu();
+			menu_options.displayMainMenu();
 			homePageInput();
 			break;
 		}
 	}
 	
-	public  void mainMenu() {
-		System.out.println("========================================");
-		System.out.println("|	      CrimeTime		       |");
-		System.out.println("========================================");
-		System.out.println("|  1.Police Inspector Login            |");
-		System.out.println("|  2.New Inspector? Register!          |");
-		System.out.println("|  3.Exit                              |");
-		System.out.println("========================================");
+	public void inputAfterLogin() throws IOException, PoliceException {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter Any Options:");
+		int input = sc.nextInt();
+		
+		switch (input) {
+		case 1:
+			crime.addNewCrime();
+			break;
+		case 2:
+			
+			break;
+		case 3: 
+			crime.displayAllCrime();
+			break;
+		case 4:
+			
+			break;
+		case 5:
+			
+			break;
+		case 6:
+			
+			break;
+		case 7:
+			crime.displayCrimeDetailsWithCrimeID();
+			break;
+		case 8:
+			SearchFuntions s2 = new SearchFuntions();
+			s2.CriminalWithCriminalID();
+		    break;
+		case 9:
+		    crime.GenerateReport();
+			break;
+		case 10:
+			UserInputMenu menu_options = new UserInputMenu();
+			System.out.println("Logged Out");
+			menu_options.displayMainMenu();
+			homePageInput();
+			break;
+		default:
+			System.out.println("Wrong Input");
+			inputAfterLogin();
+		}
+		sc.close();
 	}
-	
 	
 	
 }

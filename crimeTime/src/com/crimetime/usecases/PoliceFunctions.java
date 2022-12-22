@@ -26,6 +26,8 @@ import com.crimetime.model.Police;
 public class PoliceFunctions {
 	
 	UserInputMenu menu_options = new UserInputMenu();
+	CrimeUsecases crime = new CrimeUsecases();
+	MainApp main = new MainApp();
 	
 	//police Login
 	public void  policeLogin() throws PoliceException, IOException {
@@ -40,8 +42,8 @@ public class PoliceFunctions {
 		boolean res = dao.policeLogin(police_id, password);
 		if(res) {
 			System.out.println("Login Successful!");
-			menu_options.DisplayPoliceMenu();
-			inputAfterLogin();
+			menu_options.displayMenuAfterLogin();
+			MainApp.homePageInput();
 			
 		 }
 		}catch(PoliceException e) {
@@ -83,61 +85,17 @@ public class PoliceFunctions {
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
 		}
-		MainApp m = new MainApp();
-		m.mainMenu();
-		m.homePageInput();
+		
+		//calling a static method homepageinput
+		MainApp.homePageInput();
+		
 	}
 	
 	
 	
 	
 	//police input
-	public void inputAfterLogin() throws IOException, PoliceException {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Enter Any Options:");
-		int input = sc.nextInt();
-		
-		switch (input) {
-		case 1:
-			AddNewCrime();
-			break;
-		case 2:
-			AddNewCriminal();
-			break;
-		case 3: 
-			DisplayAllCrime();
-			break;
-		case 4:
-			DisplayAllCriminal();
-			break;
-		case 5:
-			LinkCrimeToCriminal();
-			break;
-		case 6:
-			UpdateCrimeStatus();
-			break;
-		case 7:
-			SearchFuntions s = new SearchFuntions();
-			s.CrimeWithCrimeID();;
-			break;
-		case 8:
-			SearchFuntions s2 = new SearchFuntions();
-			s2.CriminalWithCriminalID();
-		    break;
-		case 9:
-			GenerateReport();
-			break;
-		case 10:
-			System.out.println("Logged Out");
-			MainApp m = new MainApp();
-			m.mainMenu();
-			m.homePageInput();
-			break;
-		default:
-			System.out.println("Wrong Input");
-			inputAfterLogin();
-		}
-	}
+	
 	
 	//add a new Crime
 	public void AddNewCrime() throws IOException, PoliceException {	
@@ -192,8 +150,8 @@ public class PoliceFunctions {
 			new_crime.addNewCrime(crime);
 			
 			//display back the menu
-			menu_options.DisplayPoliceMenu();
-			inputAfterLogin();
+			menu_options.displayMenuAfterLogin();
+			main.inputAfterLogin();
 		}catch(CrimeException e){
 			e.printStackTrace();
 			System.out.println(e.getMessage());
@@ -241,8 +199,8 @@ public class PoliceFunctions {
 			dao.addNewCriminal(criminal);
 			
 			//display back the menu
-			menu_options.DisplayPoliceMenu();
-			inputAfterLogin();
+			menu_options.displayMenuAfterLogin();
+			main.inputAfterLogin();
 			
 		}catch(CriminalException e){
 			System.out.println(e.getMessage());
@@ -300,7 +258,7 @@ public class PoliceFunctions {
 		
 		crimeDao dao = new crimeDaoImpl();
 		try {
-			List<Crime> list = dao.displayAllCrimeDetails();
+			List<Crime> list = dao.displayAllCrime();
 	
 			if(list.size()!=0) {
 				System.out.println("CRIME RECORDS!!!");
@@ -363,13 +321,13 @@ public class PoliceFunctions {
 		MainApp m = new MainApp();
 		if(input==1) {
 			System.out.println();
-		    menu_options.DisplayPoliceMenu();
-		    inputAfterLogin();
+		    menu_options.displayMenuAfterLogin();
+		    main.inputAfterLogin();
 		}else if(input==2) {
 			System.out.println("Logged Out!");
 			System.out.println();
-			m.mainMenu();
-			m.homePageInput();
+			menu_options.displayMainMenu();
+			MainApp.homePageInput();
 		}else {
 			System.out.println("Wrong Input! Choose Again.");
 			backToMainMenuOrLogout();
@@ -377,22 +335,5 @@ public class PoliceFunctions {
 		}
 	}
 	
-	//Generate Report
-	public void GenerateReport() throws PoliceException, IOException {
-		
-		crimeDao dao = new crimeDaoImpl();
-		try {
-			String[] arr = dao.generateReport();
-			System.out.println("=================Report=============");
-			System.out.println("Total Number of Crime    :"+arr[0]);
-			System.out.println("Crime in Current Month   :"+arr[1]);
-			System.out.println("Unsolved Crime           :"+arr[2]);
-			System.out.println("Solved Crime             :"+arr[3]);
-			
-		}catch(CrimeException e) {
-			System.out.println(e.getMessage());
-		}
-		backToMainMenuOrLogout();
-		
-	}
+	
 }
