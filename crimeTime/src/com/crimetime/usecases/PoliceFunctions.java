@@ -25,6 +25,8 @@ import com.crimetime.model.Police;
 
 public class PoliceFunctions {
 	
+	UserInputMenu menu_options = new UserInputMenu();
+	
 	//police Login
 	public void  policeLogin() throws PoliceException, IOException {
 		Scanner sc = new Scanner(System.in);
@@ -38,8 +40,8 @@ public class PoliceFunctions {
 		boolean res = dao.policeLogin(police_id, password);
 		if(res) {
 			System.out.println("Login Successful!");
-			DisplayPoliceMenu();
-			PoliceMainInput();
+			menu_options.DisplayPoliceMenu();
+			inputAfterLogin();
 			
 		 }
 		}catch(PoliceException e) {
@@ -50,7 +52,7 @@ public class PoliceFunctions {
 	}
 	
 	//add police
-	public  void AddPolice() throws PoliceException, IOException {
+	public  void registerNewPoliceUser() throws PoliceException, IOException {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("POLICE REGISTRATION");
 		System.out.println("Enter Police ID:");
@@ -87,24 +89,10 @@ public class PoliceFunctions {
 	}
 	
 	
-	//police menu
-	public void DisplayPoliceMenu() {
-		System.out.println("========================================");
-		System.out.println("| 1. Register a New Crime              |");
-		System.out.println("| 2. Register a new Criminal           |");
-		System.out.println("| 3. Display All Crime                 |");
-		System.out.println("| 4. Display All Criminal              |");
-		System.out.println("| 5. Link  Criminal with  Crime        |");
-		System.out.println("| 6. Update a Crime Status             |");
-		System.out.println("| 7. Search Crime With Crime ID        |");
-		System.out.println("| 8. Seacrh Criminal with Criminal ID  |");
-		System.out.println("| 9. Generate Report                   |");
-		System.out.println("|10. Logout                            |");
-		System.out.println("========================================");
-	}
+	
 	
 	//police input
-	public void PoliceMainInput() throws IOException, PoliceException {
+	public void inputAfterLogin() throws IOException, PoliceException {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter Any Options:");
 		int input = sc.nextInt();
@@ -147,7 +135,7 @@ public class PoliceFunctions {
 			break;
 		default:
 			System.out.println("Wrong Input");
-			PoliceMainInput();
+			inputAfterLogin();
 		}
 	}
 	
@@ -204,8 +192,8 @@ public class PoliceFunctions {
 			new_crime.addNewCrime(crime);
 			
 			//display back the menu
-			DisplayPoliceMenu();
-			PoliceMainInput();
+			menu_options.DisplayPoliceMenu();
+			inputAfterLogin();
 		}catch(CrimeException e){
 			e.printStackTrace();
 			System.out.println(e.getMessage());
@@ -253,8 +241,8 @@ public class PoliceFunctions {
 			dao.addNewCriminal(criminal);
 			
 			//display back the menu
-			DisplayPoliceMenu();
-			PoliceMainInput();
+			menu_options.DisplayPoliceMenu();
+			inputAfterLogin();
 			
 		}catch(CriminalException e){
 			System.out.println(e.getMessage());
@@ -284,7 +272,7 @@ public class PoliceFunctions {
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
 		}
-		PressOneorTwo();
+		backToMainMenuOrLogout();
 		
 	}
 	
@@ -303,7 +291,7 @@ public class PoliceFunctions {
 		}catch(CrimeException e) {
 			System.out.println(e.getMessage());
 		}
-		PressOneorTwo();
+		backToMainMenuOrLogout();
 		
 	}
 	
@@ -328,7 +316,7 @@ public class PoliceFunctions {
 				System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------");
 
 			}
-			PressOneorTwo();
+			backToMainMenuOrLogout();
 			
 		}catch(CrimeException e) {
 			System.out.println(e.getMessage());
@@ -356,7 +344,7 @@ public class PoliceFunctions {
 				System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------");
 
 			}
-			PressOneorTwo();
+			backToMainMenuOrLogout();
 			
 		}catch(CriminalException e) {
 			System.out.println(e.getMessage());
@@ -365,7 +353,7 @@ public class PoliceFunctions {
 	}
 	
 	//option to logout or previous  menu
-	public void PressOneorTwo() throws PoliceException, IOException {
+	public void backToMainMenuOrLogout() throws PoliceException, IOException {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("--------------------------------");
 		System.out.println("|Press 1 to back to main menu! |");
@@ -375,8 +363,8 @@ public class PoliceFunctions {
 		MainApp m = new MainApp();
 		if(input==1) {
 			System.out.println();
-		    DisplayPoliceMenu();
-		    PoliceMainInput();
+		    menu_options.DisplayPoliceMenu();
+		    inputAfterLogin();
 		}else if(input==2) {
 			System.out.println("Logged Out!");
 			System.out.println();
@@ -384,7 +372,7 @@ public class PoliceFunctions {
 			m.homePageInput();
 		}else {
 			System.out.println("Wrong Input! Choose Again.");
-			PressOneorTwo();
+			backToMainMenuOrLogout();
 			
 		}
 	}
@@ -404,7 +392,7 @@ public class PoliceFunctions {
 		}catch(CrimeException e) {
 			System.out.println(e.getMessage());
 		}
-		PressOneorTwo();
+		backToMainMenuOrLogout();
 		
 	}
 }

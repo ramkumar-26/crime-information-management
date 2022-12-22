@@ -33,7 +33,7 @@ public class MainApp {
 			break;
 		case 2: 
 			PoliceFunctions new_data = new PoliceFunctions();
-			new_data.AddPolice();
+			new_data.registerNewPoliceUser();
 			break;
 		case 3: 
 			System.out.println("Thank You! (Exited)");

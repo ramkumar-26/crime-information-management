@@ -25,7 +25,7 @@ public class SearchFuntions {
 		try {
 			Criminal c = dao.displayCriminalDetailsWithCriminalID(input);
 			List<Crime> crime_list = dao.CrimesLinkedWithCriminal(input) ;
-			String status = dao2.getCrimeStatus(input);
+			
 			
 			
 			if(c!=null) {
@@ -43,6 +43,7 @@ public class SearchFuntions {
 				}else {
 					for(int i=0;i<crime_list.size();i++) {
 						Crime cri = crime_list.get(i);
+						String status = dao2.getCrimeStatus(cri.getCrime_id());
 						System.out.println("====================================================");
 						System.out.println(" Crime Id              : "+cri.getCrime_id());
 						System.out.println(" Crime Date            : "+cri.getCrime_date());
@@ -65,7 +66,7 @@ public class SearchFuntions {
 			}
 			PoliceFunctions pf = new PoliceFunctions();
 			
-			pf.PressOneorTwo();
+			pf.backToMainMenuOrLogout();
 			
 		}catch(CriminalException e) {
 			System.out.println(e.getMessage());
@@ -120,7 +121,7 @@ public class SearchFuntions {
 			
 			PoliceFunctions pf = new PoliceFunctions();
 			
-			pf.PressOneorTwo();
+			pf.backToMainMenuOrLogout();
 			
 		} catch (CrimeException e) {
 			// TODO Auto-generated catch block
