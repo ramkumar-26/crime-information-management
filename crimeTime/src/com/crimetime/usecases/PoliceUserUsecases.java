@@ -8,11 +8,12 @@ import com.crimetime.dao.PoliceUserDaoImpl;
 import com.crimetime.exception.PoliceException;
 import com.crimetime.model.Police;
 
-public class PoliceFunctions {
+public class PoliceUserUsecases {
 	
+	UserInput input = new UserInput();
 	UserInputMenu menu_options = new UserInputMenu();
 	CrimeUsecases crime = new CrimeUsecases();
-	MainApp main = new MainApp();
+	
 	
 	//police Login
 	public void  policeLogin() throws PoliceException, IOException {
@@ -28,7 +29,7 @@ public class PoliceFunctions {
 		if(res) {
 			System.out.println("Login Successful!");
 			menu_options.displayMenuAfterLogin();
-			MainApp.homePageInput();
+			input.homePageInput();
 			
 		 }
 		}catch(PoliceException e) {
@@ -73,35 +74,11 @@ public class PoliceFunctions {
 		}
 		
 		
-		MainApp.homePageInput();
+		input.homePageInput();
 		sc.close();
 	}
 	
-	//option to logout or previous  menu
-	public void backToMainMenuOrLogout() throws PoliceException, IOException {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("--------------------------------");
-		System.out.println("|Press 1 to back to main menu! |");
-		System.out.println("|Press 2 to logout!            |");
-		System.out.println("--------------------------------");
-		int input = sc.nextInt();
-		
-		if(input==1) {
-			System.out.println();
-		    menu_options.displayMenuAfterLogin();
-		    main.inputAfterLogin();
-		}else if(input==2) {
-			System.out.println("Logged Out!");
-			System.out.println();
-			menu_options.displayMainMenu();
-			MainApp.homePageInput();
-		}else {
-			System.out.println("Wrong Input! Choose Again.");
-			backToMainMenuOrLogout();
-			
-		}
-		sc.close();
-	}
+	
 	
 	
 }

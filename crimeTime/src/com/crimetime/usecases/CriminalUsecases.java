@@ -18,9 +18,10 @@ import com.crimetime.model.Criminal;
 
 
 public class CriminalUsecases {
+	UserInput input = new UserInput();
 	UserInputMenu menu_options = new UserInputMenu();
 	MainApp main = new MainApp();
-	PoliceFunctions police_objects = new PoliceFunctions();
+	PoliceUserUsecases police_objects = new PoliceUserUsecases();
 	
 	//Add a new Criminal
 		public void addNewCriminal() throws IOException, PoliceException {
@@ -60,7 +61,7 @@ public class CriminalUsecases {
 				
 				//display back the menu
 				menu_options.displayMenuAfterLogin();
-				main.inputAfterLogin();
+				input.inputAfterLogin();
 				
 			}catch(CriminalException e){
 				System.out.println(e.getMessage());
@@ -69,45 +70,43 @@ public class CriminalUsecases {
 		}
 		
 		
-		//View all crime
-		public void displayAllCrime() throws PoliceException, IOException {
+		public void displayAllCriminal() throws PoliceException, IOException {
 			
-			crimeDao dao = new crimeDaoImpl();
+			criminalDao dao = new criminalDaoImpl();
 			try {
-				List<Crime> list = dao.displayAllCrime();
+				List<Criminal> list = dao.displayAllCriminal();
 		
 				if(list.size()!=0) {
-					System.out.println("CRIME RECORDS!!!");
+					System.out.println("CRIMINAL RECORDS!!!");
 					System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------");
 					for(int i=0;i<list.size();i++) {
-						  Crime c =  list.get(i);
+						  Criminal c =  list.get(i);
 
-						  System.out.println("Crime [crime_id=" + c.getCrime_id() + ", crime_date=" + c.getCrime_date() + ", short_desc=" + c.getShort_desc()
-						+  ", area_of_crime=" + c.getArea_of_crime() + ", policestation_code="
-						+ c.getPolicestation_code() + ", victim_name=" + c.getVictim_name() +", v_mobileNumber=" + c.getV_mobileNumber()+ "]");
-
+						 System.out.println("Criminal [criminal_id=" + c.getCriminal_id() + ", criminal_name=" + c.getCriminal_name() + ", age=" + c.getAge()
+									+ ", gender=" + c.getGender() + ", markInFace=" + c.getMarkInFace() + ", FirstArrestPlace=" + c.getFirstArrestPlace() + "]");
+					
 					  }
 					System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------");
 
 				}
-				police_objects.backToMainMenuOrLogout();
+				input.backToMainMenuOrLogout();
 				
-			}catch(CrimeException e) {
+			}catch(CriminalException e) {
 				System.out.println(e.getMessage());
 			}
 			
 		}
 		
 		
-		public void SearchCriminalWithCriminalID() throws PoliceException, IOException {
+		public void searchCriminalWithCriminalID() throws PoliceException, IOException {
 			Scanner sc = new Scanner(System.in);
 			System.out.println("Enter Criminal ID:");
-			int input = sc.nextInt();
+			int criminalId = sc.nextInt();
 			criminalDao dao = new criminalDaoImpl();
 			crimeDao dao2 = new crimeDaoImpl();
 			try {
-				Criminal c = dao.displayCriminalDetailsWithCriminalID(input);
-				List<Crime> crime_list = dao.crimesLinkedWithCriminal(input) ;
+				Criminal c = dao.displayCriminalDetailsWithCriminalID(criminalId);
+				List<Crime> crime_list = dao.crimesLinkedWithCriminal(criminalId) ;
 				
 				
 				
@@ -147,14 +146,15 @@ public class CriminalUsecases {
 				}else {
 					System.out.println("Criminal Not Found!");
 				}
-				PoliceFunctions pf = new PoliceFunctions();
 				
-				pf.backToMainMenuOrLogout();
 				
+				
+				input.backToMainMenuOrLogout();
+				sc.close();
 			}catch(CriminalException e) {
 				System.out.println(e.getMessage());
 			}
-			
+			sc.close();
 		}
 		
 		

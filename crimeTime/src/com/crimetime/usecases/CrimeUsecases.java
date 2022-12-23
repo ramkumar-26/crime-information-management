@@ -16,9 +16,9 @@ import com.crimetime.model.InvestigationDetails;
 
 
 public class CrimeUsecases {
-	PoliceFunctions police_object = new PoliceFunctions(); 
+	PoliceUserUsecases police_object = new PoliceUserUsecases(); 
 	UserInputMenu menu_options = new UserInputMenu();
-	MainApp main_app = new MainApp();
+	UserInput input = new UserInput();
 	
 	public void addNewCrime() throws IOException, PoliceException {	
 		
@@ -73,7 +73,7 @@ public class CrimeUsecases {
 			
 			//display back the menu
 			menu_options.displayMenuAfterLogin();
-			main_app.inputAfterLogin();
+			input.inputAfterLogin();
 		}catch(CrimeException e){
 			e.printStackTrace();
 			System.out.println(e.getMessage());
@@ -96,7 +96,7 @@ public class CrimeUsecases {
 		}catch(CrimeException e) {
 			System.out.println(e.getMessage());
 		}
-		police_object.backToMainMenuOrLogout();  
+		input.backToMainMenuOrLogout();  
 	
 	}
 	
@@ -121,7 +121,7 @@ public class CrimeUsecases {
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
 		}
-		police_object.backToMainMenuOrLogout(); 
+		input.backToMainMenuOrLogout(); 
 		
 	}
 	
@@ -145,7 +145,7 @@ public class CrimeUsecases {
 				System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------");
 
 			}
-			police_object.backToMainMenuOrLogout();
+			input.backToMainMenuOrLogout();
 			
 		}catch(CrimeException e) {
 			System.out.println(e.getMessage());
@@ -153,16 +153,16 @@ public class CrimeUsecases {
 		
 	}
 	
-	public void displayCrimeDetailsWithCrimeID() throws PoliceException, IOException {
+	public void searchCrimeDetailsWithCrimeID() throws PoliceException, IOException {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter Crime ID:");
-		int input = sc.nextInt();
+		int crimeId = sc.nextInt();
 		crimeDao dao = new crimeDaoImpl();
 		
 		try {
-			Crime c = dao.displayCrimeDetailsWithCrimeID(input);
-			List<Criminal> criminal_list = dao.criminalsLinkedWithCrime(input);
-			String status = dao.getCrimeStatus(input);
+			Crime c = dao.displayCrimeDetailsWithCrimeID(crimeId);
+			List<Criminal> criminal_list = dao.criminalsLinkedWithCrime(crimeId);
+			String status = dao.getCrimeStatus(crimeId);
 			
 			System.out.println("====================================================");
 			System.out.println(" Crime Id              : "+c.getCrime_id());
@@ -196,14 +196,13 @@ public class CrimeUsecases {
 				
 			}
 			
-			PoliceFunctions pf = new PoliceFunctions();
-			
-			pf.backToMainMenuOrLogout();
+			input.backToMainMenuOrLogout();
 			
 		} catch (CrimeException e) {
 			// TODO Auto-generated catch block
 			System.err.println(e.getMessage());
 		}
+		
 	}
 	
 	public void GenerateReport() throws PoliceException, IOException {
@@ -220,7 +219,7 @@ public class CrimeUsecases {
 		}catch(CrimeException e) {
 			System.out.println(e.getMessage());
 		}
-		police_object.backToMainMenuOrLogout();
+		input.backToMainMenuOrLogout();
 		
 	}
 	
