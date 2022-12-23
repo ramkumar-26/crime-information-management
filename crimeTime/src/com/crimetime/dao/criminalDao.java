@@ -12,12 +12,11 @@ public interface criminalDao {
 	//add a new criminal
 	public int addNewCriminal(Criminal c) throws CriminalException; 
 	
-	public List<Criminal> displayAllCriminalDetails() throws CriminalException;
-
+	public List<Criminal> displayAllCriminal() throws CriminalException;
 	
-	public List<Crime> CrimesLinkedWithCriminal(int criminalID);
+	public List<Crime> crimesLinkedWithCriminal(int criminalID);
 
-	Criminal displayCriminalDetailsWithCriminalID(int criminalID) throws CriminalException;
+	public Criminal displayCriminalDetailsWithCriminalID(int criminalID) throws CriminalException;
 	
 	
 	

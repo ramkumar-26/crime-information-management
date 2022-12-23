@@ -46,7 +46,7 @@ public class criminalDaoImpl implements criminalDao {
 	}
 
 	@Override
-	public List<Criminal> displayAllCriminalDetails() throws CriminalException {
+	public List<Criminal> displayAllCriminal() throws CriminalException {
 		List<Criminal> c = new ArrayList<>();
 		
 		try(Connection conn =  DBUtil.provideConnection()){
@@ -101,7 +101,7 @@ public class criminalDaoImpl implements criminalDao {
 	}
 
 	@Override
-	public List<Crime> CrimesLinkedWithCriminal(int criminalID) {
+	public List<Crime> crimesLinkedWithCriminal(int criminalID) {
 		// TODO Auto-generated method stub
         List<Crime> c = new ArrayList<>();
 		

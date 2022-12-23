@@ -10,7 +10,7 @@ import com.crimetime.model.Police;
 import com.crimetime.utility.DBUtil;
 
 
-public class PoliceDaoImpl implements PoliceDao {
+public class PoliceUserDaoImpl implements PoliceUserDao {
 
 	@Override
 	public int addPolice(Police police) throws PoliceException {

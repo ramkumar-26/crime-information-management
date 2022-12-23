@@ -9,6 +9,7 @@ import com.crimetime.model.Police;
 public class MainApp {
 	CrimeUsecases crime = new CrimeUsecases();
 	
+	
 	public static void main(String[] args) throws PoliceException, IOException {
 		
 		
@@ -48,7 +49,7 @@ public class MainApp {
 		}
 	}
 	
-	public void inputAfterLogin() throws IOException, PoliceException {
+	public  void inputAfterLogin() throws IOException, PoliceException {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter Any Options:");
 		int input = sc.nextInt();
@@ -76,8 +77,8 @@ public class MainApp {
 			crime.displayCrimeDetailsWithCrimeID();
 			break;
 		case 8:
-			SearchFuntions s2 = new SearchFuntions();
-			s2.CriminalWithCriminalID();
+			
+			
 		    break;
 		case 9:
 		    crime.GenerateReport();
@@ -94,6 +95,8 @@ public class MainApp {
 		}
 		sc.close();
 	}
+	
+	
 	
 	
 }
