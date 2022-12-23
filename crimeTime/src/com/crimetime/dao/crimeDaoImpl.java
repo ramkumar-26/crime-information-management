@@ -18,7 +18,7 @@ import com.crimetime.utility.DBUtil;
 public class crimeDaoImpl implements crimeDao {
 	
 	
-	public List<Criminal> CriminalsLinkedWithCrime(int crimeID){
+	public List<Criminal> criminalsLinkedWithCrime(int crimeID){
 		List<Criminal> c = new ArrayList<>();
 		
 		try(Connection conn =  DBUtil.provideConnection()){
@@ -175,7 +175,7 @@ public class crimeDaoImpl implements crimeDao {
 	}
 
 	@Override
-	public List<Crime> displayAllCrimeDetails() throws CrimeException {
+	public List<Crime> displayAllCrime() throws CrimeException {
 		// TODO Auto-generated method stub
 		List<Crime> c = new ArrayList<>();
 		
@@ -199,12 +199,6 @@ public class crimeDaoImpl implements crimeDao {
 		}
 		return c;
 	}
-
-	
-
-	
-
-	
 
 	@Override
 	public int linkCriminalWithCrime(InvestigationDetails id) throws CrimeException {
@@ -235,8 +229,6 @@ public class crimeDaoImpl implements crimeDao {
 		return res;
 	}
 
-
-
 	@Override
 	public String getCrimeStatus(int crimeID) {
 		// TODO Auto-generated method stub
@@ -256,8 +248,6 @@ public class crimeDaoImpl implements crimeDao {
 		}
 		return res;
 	}
-
-
 
 	@Override
 	public String[] generateReport() throws CrimeException {
@@ -305,5 +295,10 @@ public class crimeDaoImpl implements crimeDao {
 			
 		return report;
 	}
+
+
+
+	
+	
 
 }

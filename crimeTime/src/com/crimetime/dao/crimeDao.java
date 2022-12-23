@@ -21,10 +21,10 @@ public interface crimeDao {
 	//display crime based on filter
 	
 	public Crime displayCrimeDetailsWithCrimeID(int crimeID) throws CrimeException;
-	public List<Crime> displayAllCrimeDetails() throws CrimeException;
+	public List<Crime> displayAllCrime() throws CrimeException;
 	
 	
-	public List<Criminal> CriminalsLinkedWithCrime(int crimeID);
+	public List<Criminal> criminalsLinkedWithCrime(int crimeID);
 	
 	public String getCrimeStatus(int crimeID);
 	
