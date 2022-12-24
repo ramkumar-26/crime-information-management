@@ -13,6 +13,7 @@ As a police officer, they need to manage all the crimes and criminals in a effec
 we need a "Crime Inforamtion Mangement" software. This is were our software kicks in and provide all the 
 neccessary functions to manage and maintain crimes as well criminals data.
 
+
 Project Type:- Individual
 -------------
 
