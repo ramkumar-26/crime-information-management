@@ -19,7 +19,7 @@ public class UserInput {
 		switch(input) {
 		case 1:
 			PoliceUserUsecases new_login = new PoliceUserUsecases();
-			new_login.policeLogin();
+			new_login.policeUserLogin();
 			break;
 		case 2: 
 			PoliceUserUsecases new_data = new PoliceUserUsecases();
@@ -60,7 +60,7 @@ public class UserInput {
 			crime.linkCriminalWithCrime();
 			break;
 		case 6:
-			
+			criminal.searchCriminalWithCriminalID();
 			break;
 		case 7:
 			crime.searchCrimeDetailsWithCrimeID();

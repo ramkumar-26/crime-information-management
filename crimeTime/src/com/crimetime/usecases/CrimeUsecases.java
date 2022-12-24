@@ -5,9 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Scanner;
-
-import com.crimetime.dao.crimeDao;
-import com.crimetime.dao.crimeDaoImpl;
+import com.crimetime.dao.CrimeDao;
+import com.crimetime.dao.CrimeDaoImpl;
 import com.crimetime.exception.CrimeException;
 import com.crimetime.exception.PoliceException;
 import com.crimetime.model.Crime;
@@ -67,7 +66,7 @@ public class CrimeUsecases {
 		
 		Crime crime = new Crime(crime_id, s_date, s_desc, d_desc, areaOfCrime, ps, v_name, v_age, v_gender, phone_no, v_address);
 		
-		crimeDao new_crime = new crimeDaoImpl();
+		CrimeDao new_crime = new CrimeDaoImpl();
 		try {
 			new_crime.addNewCrime(crime);
 			
@@ -90,7 +89,7 @@ public class CrimeUsecases {
 		String status = sc.next();
 	
 	
-		crimeDao dao = new crimeDaoImpl();
+		CrimeDao dao = new CrimeDaoImpl();
 		try {
 			System.out.println(dao.updateCrimeStatus(crime_id, status));
 		}catch(CrimeException e) {
@@ -114,7 +113,7 @@ public class CrimeUsecases {
 		
 		InvestigationDetails id = new InvestigationDetails(in_id, crime_id, criminal_id, "Unsolved", officer_id);
 		
-		crimeDao dao = new crimeDaoImpl();
+		CrimeDao dao = new CrimeDaoImpl();
 		try {
 			dao.linkCriminalWithCrime(id);
 		} catch (CrimeException e) {
@@ -127,7 +126,7 @@ public class CrimeUsecases {
 	
 	public void displayAllCrime() throws PoliceException, IOException {
 		
-		crimeDao dao = new crimeDaoImpl();
+		CrimeDao dao = new CrimeDaoImpl();
 		try {
 			List<Crime> list = dao.displayAllCrime();
 	
@@ -157,7 +156,7 @@ public class CrimeUsecases {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter Crime ID:");
 		int crimeId = sc.nextInt();
-		crimeDao dao = new crimeDaoImpl();
+		CrimeDao dao = new CrimeDaoImpl();
 		
 		try {
 			Crime c = dao.displayCrimeDetailsWithCrimeID(crimeId);
@@ -207,7 +206,7 @@ public class CrimeUsecases {
 	
 	public void GenerateReport() throws PoliceException, IOException {
 		
-		crimeDao dao = new crimeDaoImpl();
+		CrimeDao dao = new CrimeDaoImpl();
 		try {
 			String[] arr = dao.generateReport();
 			System.out.println("=================Report=============");

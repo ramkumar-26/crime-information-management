@@ -13,7 +13,7 @@ import com.crimetime.model.Crime;
 import com.crimetime.model.Criminal;
 import com.crimetime.utility.DBUtil;
 
-public class criminalDaoImpl implements criminalDao {
+public class CriminalDaoImpl implements CriminalDao {
 	
 
 	@Override

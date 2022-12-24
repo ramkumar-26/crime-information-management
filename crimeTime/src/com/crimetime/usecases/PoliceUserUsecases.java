@@ -16,7 +16,7 @@ public class PoliceUserUsecases {
 	
 	
 	//police Login
-	public void  policeLogin() throws PoliceException, IOException {
+	public void  policeUserLogin() throws PoliceException, IOException {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter PoliceID:");
 		int police_id = sc.nextInt();
@@ -61,7 +61,7 @@ public class PoliceUserUsecases {
 		
 		PoliceUserDao dao = new PoliceUserDaoImpl();
 		try {
-			int res = dao.addPolice(p);
+			int res = dao.registerNewPolice(p);
 			if(res==0) {
 				sc.close();
 				throw new PoliceException("Insertion Failed!");
