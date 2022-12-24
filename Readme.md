@@ -23,3 +23,5 @@ Police_Records:
 
 Investigation_Details:
 - Investigation_ID, - Crime_ID, - Criminal_ID, - Status, - Investigation_Status
+
+Demo Link - https://drive.google.com/file/d/1BCmDCNCvvSE_ZTvn2CJjgHg55vNFIALZ/view?usp=share_link
