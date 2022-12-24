@@ -6,12 +6,13 @@ import java.util.Scanner;
 import com.crimetime.exception.PoliceException;
 
 public class UserInput {
-	UserInputMenu menu_options = new UserInputMenu();
-	CrimeUsecases crime = new CrimeUsecases();
-	CriminalUsecases criminal = new CriminalUsecases();
+	
 	
 	public   void homePageInput() throws PoliceException, IOException {
 		UserInputMenu menu_options = new UserInputMenu();
+		CrimeUsecases crime = new CrimeUsecases();
+		CriminalUsecases criminal = new CriminalUsecases();
+	
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter any Option:");
 		int input = sc.nextInt();
@@ -39,6 +40,9 @@ public class UserInput {
 	}
 	
 	public  void inputAfterLogin() throws IOException, PoliceException {
+		UserInputMenu menu_options = new UserInputMenu();
+		CrimeUsecases crime = new CrimeUsecases();
+		CriminalUsecases criminal = new CriminalUsecases();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter Any Options:");
 		int input = sc.nextInt();
@@ -87,6 +91,9 @@ public class UserInput {
 	
 	//option to logout or previous  menu
 		public void backToMainMenuOrLogout() throws PoliceException, IOException {
+			UserInputMenu menu_options = new UserInputMenu();
+			CrimeUsecases crime = new CrimeUsecases();
+			CriminalUsecases criminal = new CriminalUsecases();
 			Scanner sc = new Scanner(System.in);
 			System.out.println("--------------------------------");
 			System.out.println("|Press 1 to back to main menu! |");

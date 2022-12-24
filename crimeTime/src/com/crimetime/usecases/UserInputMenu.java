@@ -3,7 +3,7 @@ package com.crimetime.usecases;
 public class UserInputMenu {
 	public  void displayMainMenu() {
 		System.out.println("========================================");
-		System.out.println("|	          CrimeTime		           |");
+		System.out.println("|	       CrimeTime	       |");
 		System.out.println("========================================");
 		System.out.println("|  1.Police Inspector Login            |");
 		System.out.println("|  2.New Inspector? Register!          |");
