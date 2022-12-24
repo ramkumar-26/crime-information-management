@@ -6,10 +6,10 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Scanner;
 
-import com.crimetime.dao.crimeDao;
-import com.crimetime.dao.crimeDaoImpl;
-import com.crimetime.dao.criminalDao;
-import com.crimetime.dao.criminalDaoImpl;
+import com.crimetime.dao.CrimeDao;
+import com.crimetime.dao.CrimeDaoImpl;
+import com.crimetime.dao.CriminalDao;
+import com.crimetime.dao.CriminalDaoImpl;
 import com.crimetime.exception.CrimeException;
 import com.crimetime.exception.CriminalException;
 import com.crimetime.exception.PoliceException;
@@ -54,7 +54,7 @@ public class CriminalUsecases {
 			String arrestLocation = sc.next();
 			
 			Criminal criminal = new Criminal(criminal_id, s_name, c_age, gender, fm, arrestLocation);
-			criminalDao dao = new criminalDaoImpl();
+			CriminalDao dao = new CriminalDaoImpl();
 			try {
 				
 				dao.addNewCriminal(criminal);
@@ -72,7 +72,7 @@ public class CriminalUsecases {
 		
 		public void displayAllCriminal() throws PoliceException, IOException {
 			
-			criminalDao dao = new criminalDaoImpl();
+			CriminalDao dao = new CriminalDaoImpl();
 			try {
 				List<Criminal> list = dao.displayAllCriminal();
 		
@@ -102,8 +102,8 @@ public class CriminalUsecases {
 			Scanner sc = new Scanner(System.in);
 			System.out.println("Enter Criminal ID:");
 			int criminalId = sc.nextInt();
-			criminalDao dao = new criminalDaoImpl();
-			crimeDao dao2 = new crimeDaoImpl();
+			CriminalDao dao = new CriminalDaoImpl();
+			CrimeDao dao2 = new CrimeDaoImpl();
 			try {
 				Criminal c = dao.displayCriminalDetailsWithCriminalID(criminalId);
 				List<Crime> crime_list = dao.crimesLinkedWithCriminal(criminalId) ;

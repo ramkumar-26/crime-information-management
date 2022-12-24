@@ -13,7 +13,7 @@ import com.crimetime.utility.DBUtil;
 public class PoliceUserDaoImpl implements PoliceUserDao {
 
 	@Override
-	public int addPolice(Police police) throws PoliceException {
+	public int registerNewPolice(Police police) throws PoliceException {
 		// TODO Auto-generated method stub
 		int res = 0;
 		try(Connection conn =  DBUtil.provideConnection()){

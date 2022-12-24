@@ -15,7 +15,7 @@ import com.crimetime.model.Criminal;
 import com.crimetime.model.InvestigationDetails;
 import com.crimetime.utility.DBUtil;
 
-public class crimeDaoImpl implements crimeDao {
+public class CrimeDaoImpl implements CrimeDao {
 	
 	
 	public List<Criminal> criminalsLinkedWithCrime(int crimeID){

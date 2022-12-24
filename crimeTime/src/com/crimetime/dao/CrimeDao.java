@@ -7,7 +7,7 @@ import com.crimetime.model.Crime;
 import com.crimetime.model.Criminal;
 import com.crimetime.model.InvestigationDetails;
 
-public interface crimeDao {
+public interface CrimeDao {
 	
 	//add a new crime
 	public int addNewCrime(Crime crime) throws CrimeException;
