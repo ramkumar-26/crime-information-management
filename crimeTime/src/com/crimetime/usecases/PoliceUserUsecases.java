@@ -10,13 +10,14 @@ import com.crimetime.model.Police;
 
 public class PoliceUserUsecases {
 	
-	UserInput input = new UserInput();
-	UserInputMenu menu_options = new UserInputMenu();
-	CrimeUsecases crime = new CrimeUsecases();
 	
 	
 	//police Login
 	public void  policeUserLogin() throws PoliceException, IOException {
+		UserInput input = new UserInput();
+		UserInputMenu menu_options = new UserInputMenu();
+		CrimeUsecases crime = new CrimeUsecases();
+		
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter PoliceID:");
 		int police_id = sc.nextInt();
@@ -29,7 +30,7 @@ public class PoliceUserUsecases {
 		if(res) {
 			System.out.println("Login Successful!");
 			menu_options.displayMenuAfterLogin();
-			input.homePageInput();
+			input.inputAfterLogin();
 			
 		 }
 		}catch(PoliceException e) {
@@ -41,6 +42,10 @@ public class PoliceUserUsecases {
 	
 	//add police
 	public  void registerNewPoliceUser() throws PoliceException, IOException {
+		UserInput input = new UserInput();
+		UserInputMenu menu_options = new UserInputMenu();
+		CrimeUsecases crime = new CrimeUsecases();
+		
 		Scanner sc = new Scanner(System.in);
 		System.out.println("POLICE REGISTRATION");
 		System.out.println("Enter Police ID:");
@@ -73,7 +78,7 @@ public class PoliceUserUsecases {
 			System.out.println(e.getMessage());
 		}
 		
-		
+		menu_options.displayMainMenu();
 		input.homePageInput();
 		sc.close();
 	}
